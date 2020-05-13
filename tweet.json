@@ -1,0 +1,9 @@
+{
+	"_id": {
+		"$oid": "#######"
+	},
+	"type": "DRAFT | SCHEDULE | UNDATED",
+	"date": "Javascript UTC date",
+	"text": "Up to 500 characters of tweet",
+	"hash": 1
+}

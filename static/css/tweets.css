@@ -1,0 +1,58 @@
+div.row.tweets {
+	margin-top: 4px;
+}
+div.row.tweets div.col {
+	margin-top: 10px;
+}
+div.row.tweets div.col div.tweet-card {
+	background: #FFF;
+	padding: 20px
+}
+div.row.tweets div.col p {
+	font-size: 12px;
+}
+div.row.tweets div.col p span.b {
+	color: #3366FF;
+}
+div.row.tweets div.col div.btn.date {
+	font-size: 10px;
+	height: 24px;
+	padding-top: 4px;
+	border-radius: 0px;
+}
+div.row.tweets div.col div.options {
+	width: 50%;
+	padding-top: 2px;
+	float: right;
+}
+div.row.tweets div.col div.options table tr td {
+	width: 48px;
+	text-align: right;
+}	
+div.row.tweets div.col div.options table tr td svg {
+	width: 14px;
+	height: 14px;
+	fill: #AAA;
+}	
+div.row.tweets div.col div.options table tr td svg:hover {
+	cursor: pointer;
+	fill: #572ED8;
+}	
+
+@media only screen and (min-width: 768px) {
+	
+}
+	
+@media only screen and (min-width: 992px) {
+	div.row.tweets div.col {
+		padding: 0 10px 20px 10px;
+	}
+	div.row.tweets div.col span.option {
+		margin-right: -12px;
+	}	
+}
+	
+@media only screen and (min-width: 1200px) {
+		
+}
+	

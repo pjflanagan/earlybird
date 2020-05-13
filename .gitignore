@@ -1,0 +1,24 @@
+
+# OPERATING SYSTEM and COMPILED
+**/*.pyc
+.DS_Store
+*~
+source.tar.gz
+.env
+postgres.py
+.vscode
+__pycache__
+__env__
+
+# ARCHIVED FILES
+.archive
+**/*.zip
+
+# STATIC
+**/static/.webassets-cache
+**/static/gen
+icons/*
+error/*
+
+# SECRET
+credentials.txt

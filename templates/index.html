@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block content %}
+<!--NAV HEADER-->
+<nav class="navbar fixed-top" ng-controller="headerController" ng-init="init()">
+	<div id="loading"></div>
+	<a class="navbar-brand" href="#">
+		<img class="d-none d-lg-block" src="https://s3.amazonaws.com/early-bird-twitter-files/assets/header-lg.png" />
+		<img class="d-lg-none" src="https://s3.amazonaws.com/early-bird-twitter-files/assets/header-sm.png" />
+	</a>
+	<nav class="nav">
+		<a class="nav-link" ng-class="{showing: showing === 'schedule'}"
+			ng-click="changeShowingType('schedule')">Schedule</a>
+		<a class="nav-link" ng-class="{showing: showing === 'draft'}" ng-click="changeShowingType('draft')">Drafts</a>
+	</nav>
+	<div class="alert" role="alert" id="popup"></div>
+	<div class="nav navbar-nav navbar-right">
+		<div class="dropdown">
+			<img class="dropdown-toggle" role="button" id="dropdownIcon" src="{{icon_url}}" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false" />
+			<div class="dropdown-menu" aria-labelledby="dropdownIcon">
+				<a class="dropdown-item" href="/logout">Logout</a>
+				<a class="dropdown-item" href="https://cash.me/$PeterFlanagan" target="_blank">Donate</a>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<!--CONTAINER-->
+<div class="container">
+	<ng-controller ng-controller="composeController" ng-init="init()">
+		<div class="row">
+			<!--text-->
+			<div class="col offset-md-2 col-md-8 compose">
+				<textarea ng-keyup="typeHandler()" ng-model="tweet.text" name="tweet"
+					placeholder="New tweet from @{{handle}}" text-format></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<!--options-->
+			<div class="col offset-md-2 col-md-8 options">
+				<table class="table">
+					<tr>
+						<!--datepicker-->
+						<td id="datepicker-cell">
+							<div class="icon-wrapper btn" ng-init="initDate()"
+								ng-class="{schedule: actions.includeDate}">
+								<!--span data-toggle="tooltip" data-placement="top" title="Toggle Date"-->
+								<span ng-click="dateToggle()">
+									{% include 'svg/calendar.svg' %}
+								</span>
+								<span class="datetime-hidder">
+									<input type="date" id="date" ng-model="tweet.date" />
+									<input type="time" id="time" ng-model="tweet.date" />
+								</span>
+							</div>
+						</td>
+						<!--length-->
+						<td class="small-cell" id="option-length"
+							ng-class="{warn: MAX_TWEET_LENGTH - tweet.text.length < 0}"
+							ng-bind="MAX_TWEET_LENGTH - tweet.text.length"></td>
+						<!--xs sm md-->
+						<td class="small-cell d-lg-none">
+							<span>
+								<div ng-class="{draft: actions.draft, 'd-block': !actions.includeDate}"
+									class="icon-wrapper btn d-none" ng-click="create('draft');">
+									{% include 'svg/draft.svg' %}
+								</div>
+							</span>
+							<span>
+								<div ng-class="{schedule: actions.schedule, 'd-block': actions.includeDate}"
+									class="icon-wrapper btn d-none" ng-click="create('schedule');">
+									{% include 'svg/schedule.svg' %}
+								</div>
+							</span>
+						</td>
+						<td class="small-cell d-lg-none">
+							<span>
+								<div ng-class="{cancel: actions.cancel}" class="icon-wrapper btn" ng-click="cancel();">{% include
+									'svg/cancel.svg' %}</div>
+							</span>
+						</td>
+						<!--lg xl-->
+						<td class="small-cell d-none d-lg-table-cell">
+							<span data-toggle="tooltip" data-placement="top" title="Draft">
+								<div ng-class="{draft: actions.draft}" class="icon-wrapper btn"
+									ng-click="create('draft');">{% include
+									'svg/draft.svg' %}</div>
+							</span>
+						</td>
+						<td class="small-cell d-none d-lg-table-cell">
+							<span data-toggle="tooltip" data-placement="top" title="Schedule">
+								<div ng-class="{schedule: actions.schedule}" class="icon-wrapper btn"
+									ng-click="create('schedule');">{% include
+									'svg/schedule.svg' %}</div>
+							</span>
+						</td>
+						<td class="small-cell d-none d-lg-table-cell">
+							<span data-toggle="tooltip" data-placement="top" title="Send">
+								<div ng-class="{send: actions.send}" class="icon-wrapper btn" ng-click="send();">{% include 'svg/send.svg'
+									%}</div>
+							</span>
+						</td>
+						<td class="small-cell d-none d-lg-table-cell">
+							<span data-toggle="tooltip" data-placement="top" title="Cancel">
+								<div ng-class="{cancel: actions.cancel}" class="icon-wrapper btn" ng-click="cancel();">{% include
+									'svg/cancel.svg' %}</div>
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</ng-controller>
+	<ng-controller ng-controller="tweetsController">
+		<div class="row tweets" ng-init="initTweets()">
+			<!--tweets-->
+			<div class="col col-12 col-md-6 col-lg-4"
+				ng-repeat="tweet in tweets | filter:showingFilter | orderBy:['date', 'text']">
+				<div class="tweet-card">
+					<p ng-bind-html="tweet.displayText">Loading...</p>
+					<div class="[[tweet.type]] btn date" ng-click="convert()">
+						[[tweet.displayDate]] [[tweet.displayTime]]
+					</div>
+					<div class="options">
+						<table>
+							<tr>
+								<td>
+									<div alt="Edit" ng-click="edit()">{% include 'svg/small-pencil.svg' %}</div>
+								</td>
+								<td>
+									<div alt="Send" ng-click="send()">{% include 'svg/small-share.svg' %}</div>
+								</td>
+								<td>
+									<div alt="Delete" ng-click="trash()">{% include 'svg/small-trash.svg' %}</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-controller>
+</div>
+
+<!--FOOTER-->
+<div class="main footer d-none d-lg-block">
+	<div class="row">
+		<div class="col col-4 offset-2">
+			<h6>About</h6>
+			<p>Earlybird is a simple and free app designed to draft and schedule your tweets</p>
+		</div>
+		<div class="col col-4">
+			<h6>Contributors</h6>
+			<p>Website programmed by <a href="http://pjflanagan.me" target="_blank">Peter Flanagan</a></p>
+			<p>Logo designed by <a href="http://andreyazizov.com" target="_blank">Andrey Azizov</a></p>
+			<p>Icons designed by <a href="http://flaticon.com" target="_blank">Dave Gandy from Flaticon</a></p>
+		</div>
+	</div>
+</div>
+<div class="sub footer">
+	&copy; 2018 Earlybird | <a href="https://cash.me/$PeterFlanagan" target="_blank">Donate</a> | <a
+		href="/logout">Logout</a>
+</div>
+{% endblock %}

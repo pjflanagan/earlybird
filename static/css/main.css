@@ -1,0 +1,48 @@
+html, body {
+	background: #ECEDFF !important;
+	font-family: 'Montserrat', sans-serif !important;
+	height: 100%;
+	width: 100%;
+}
+div.container {
+	min-height: 100%;
+	padding-top: 50px;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome and Opera */
+}
+::selection {
+	background: #ECEDFF; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+	background: #ECEDFF; /* Gecko Browsers */
+}
+
+.btn { color: #FFF; -webkit-transition: .2s}
+.btn:hover { cursor: pointer; }
+.btn.draft { background: #679; fill: #FFF; }
+.btn.draft:hover { background: #456}
+.btn.schedule { background: #572ED8; fill: #FFF; }
+.btn.schedule:hover { background: #3716a0; }
+.btn.send { background: #38A1F3; fill: #FFF; }
+.btn.send:hover { background: #0084b4}
+.btn.cancel { background: #ce3838; fill: #FFF; }
+.btn.cancel:hover { background: #b31b1b; }
+
+@media only screen and (min-width: 768px) {
+	div.container {
+		padding-top: 60px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	div.container {
+		padding-top: 70px;
+	}
+}	

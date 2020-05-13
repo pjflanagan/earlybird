@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<!--META-->
+	<meta name="description"
+		content="Tweet whenever you want, right now! Early Bird is a online tweet scheduling app that lets you draft and schedule as many tweets as you'd like for FREE.">
+	<meta name="keywords"
+		content="tweet, scheduler, twitter, draft, schedule, drafts, schedules, calendar, post, time, date, tweets, account, login, app, scheduling, online, Early, Bird">
+	<meta name="author" content="pjflanagan1@gmail.com">
+
+	<!--TITLE-->
+	<title>earlybird</title>
+	<link rel="shortcut icon" href="//s3.amazonaws.com/early-bird-twitter-files/assets/favicon.png">
+
+	<!--STYLE-->
+	{% assets "css_all" %}
+	<link rel="stylesheet" href="{{ ASSET_URL }}" />
+	{% endassets %}
+
+	<!--GOOGLE FONTS-->
+	<link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+	<link href="//fonts.googleapis.com/css?family=Khula" rel="stylesheet">
+
+	<!--JQUERY-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--BOOTSTRAP-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
+
+	<!--ANGULAR-->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+
+	<!--JS-->
+	{% assets "js_all" %}
+	<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+	{% endassets %}
+
+
+	<!--IOS-->
+	<link rel="apple-touch-icon" sizes="57x57" href="//s3.amazonaws.com/early-bird-twitter-files/assets/icon-57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="//s3.amazonaws.com/early-bird-twitter-files/assets/icon-72.png" />
+	<link rel="apple-touch-icon" sizes="114x114"
+		href="//s3.amazonaws.com/early-bird-twitter-files/assets/icon-114.png" />
+	<link rel="apple-touch-icon" sizes="144x144"
+		href="//s3.amazonaws.com/early-bird-twitter-files/assets/icon-144.png" />
+
+	<!--FACEBOOK-->
+	<meta property="og:url" content="//early-bird-twitter.com" />
+	<meta property="og:image" content="//s3.amazonaws.com/early-bird-twitter-files/assets/social-media-fb.png" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="earlybird" />
+	<meta property="og:description" content="Tweet whenever you want, right now!" />
+
+	<!-- Google+ / Schema.org -->
+	<meta itemprop="name" content="earlybird" />
+	<meta itemprop="description" content="Tweet whenever you want, right now!" />
+	<meta itemprop="image" content="//s3.amazonaws.com/early-bird-twitter-files/assets/social-media-tw.png" />
+
+	<!--TWITTER-->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@earlybirdsite" />
+	<meta name="twitter:creator" content="@PeterJFlan">
+	<meta name="twitter:title" content="earlybird" />
+	<meta name="twitter:description" content="Tweet whenever you want, right now!" />
+	<meta name="twitter:image" content="//s3.amazonaws.com/early-bird-twitter-files/assets/social-media-tw.png" />
+
+	<!--EMOJI
+		<script src="//twemoji.maxcdn.com/twemoji.min.js"></script
+		
+		//afeld.github.io/emoji-css/
+
+		-->
+
+	<!--TRACKING CODE-->
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-66104630-3', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+	{% if 'token' in session %}
+	<!--PAGE LEVEL ADS--
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-8781416766784863",
+			enable_page_level_ads: true
+		});
+	</script-->
+	{% endif %}
+</head>
+
+<body ng-app="earlybird">
+	{% block content %}{% endblock %}
+</body>
+
+</html>

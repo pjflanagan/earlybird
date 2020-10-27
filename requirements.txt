@@ -1,7 +1,7 @@
 asn1crypto==0.24.0
 Authlib==0.10
 cffi==1.12.2
-cryptography==2.6.1
+cryptography==3.2
 Flask==0.10.1
 Flask-Assets==0.12
 gunicorn==19.9.0

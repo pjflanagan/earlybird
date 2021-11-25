@@ -1,0 +1,35 @@
+@import 'app/theme.less';
+
+.container {
+  margin-top: 64px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  position: absolute;
+  width: 100%;
+  min-height: calc(100% - 64px);
+
+  .containerLeft {
+    width: 100%;
+  }
+
+  .containerRight {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+
+    .containerLeft {
+      width: 36%;
+      border-right: 1px solid #0002;
+      background: @white;
+    }
+
+    .containerRight {
+      width: 64%;
+      overflow: scroll;
+    }
+  }
+}

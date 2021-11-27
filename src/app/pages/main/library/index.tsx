@@ -4,7 +4,7 @@ import { Tweet } from 'app/utils';
 
 import { TweetComponent } from './tweet';
 
-import Style from './style.module.less';
+import Style from './style.module.scss';
 
 type LibraryComponentProps = {
   tweets: Tweet[];

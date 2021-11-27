@@ -1,4 +1,4 @@
-@import 'app/theme.less';
+@import 'app/theme.scss';
 
 .container {
   margin-top: 64px;
@@ -24,7 +24,7 @@
     .containerLeft {
       width: 36%;
       border-right: 1px solid #0002;
-      background: @white;
+      background: $white;
     }
 
     .containerRight {

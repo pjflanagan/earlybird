@@ -14,7 +14,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { PageMain, PageLogin } from 'app/pages';
 
 import * as serviceWorker from './serviceWorker';
-import './style.less';
+import './style.scss';
 
 // const { REACT_APP_ENV } = process.env;
 // const composeEnhancers = (REACT_APP_ENV === 'PRD') ? compose : composeWithDevTools;
@@ -38,13 +38,13 @@ const App: FC = () => {
 }
 
 ReactDOM.render(
-  // <Auth0Provider
-  //   domain="YOUR_DOMAIN"
-  //   clientId="YOUR_CLIENT_ID"
-  //   redirectUri={window.location.origin}
-  // >
+  <Auth0Provider
+    domain="YOUR_DOMAIN"
+    clientId="YOUR_CLIENT_ID"
+    redirectUri={window.location.origin}
+  >
     <App />,
-  // </Auth0Provider>,
+  </Auth0Provider>,
   document.getElementById('root')
 );
 

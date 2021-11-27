@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Style from './style.module.less';
+import Style from './style.module.scss';
 
 export const Container: FC = ({
   children

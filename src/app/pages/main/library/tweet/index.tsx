@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Tweet } from 'app/utils';
 
-import Style from './style.module.less';
+import Style from './style.module.scss';
 
 type TweetComponentProps = {
   tweet: Tweet;

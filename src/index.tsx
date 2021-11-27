@@ -3,6 +3,7 @@
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Application } from 'react-rainbow-components';
 import { Auth0Provider } from "@auth0/auth0-react";
 
 // eslint-ignore
@@ -19,21 +20,31 @@ import './style.scss';
 // const { REACT_APP_ENV } = process.env;
 // const composeEnhancers = (REACT_APP_ENV === 'PRD') ? compose : composeWithDevTools;
 
+const theme = {
+  rainbow: {
+      palette: {
+          brand: '#562fd8',
+      },
+  },
+};
+
 const App: FC = () => {
 
   // useEffect =>
   // store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
   return (
-    <Router>
-      {/* TODO: we probably will use redux here because managing an array of tweets might need it */}
-      {/* <Provider store={store}>  */}
-      <Routes>
-        <Route path="/login" element={<PageLogin />} />
-        <Route path={"/"} element={<PageMain />} />
-      </Routes>
-      {/* </Provider> */}
-    </Router>
+    <Application theme={theme}>
+      <Router>
+        {/* TODO: we probably will use redux here because managing an array of tweets might need it */}
+        {/* <Provider store={store}>  */}
+        <Routes>
+          <Route path="/login" element={<PageLogin />} />
+          <Route path={"/"} element={<PageMain />} />
+        </Routes>
+        {/* </Provider> */}
+      </Router>
+    </Application>
   );
 }
 

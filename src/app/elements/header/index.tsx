@@ -5,19 +5,36 @@ import LogoSm from './header-sm.png';
 
 import Style from './style.module.scss';
 
-export const Header: FC = () => {
+type HeaderProps = {
+  children?: JSX.Element;
+}
+
+export const Header: FC<HeaderProps> = ({
+  children
+}) => {
   return (
     <div className={Style.header}>
-      <img
-        className={`${Style.logo} ${Style.logoMd}`}
-        src={LogoMd}
-        alt="Earlybird Logo"
-      />
-      <img
-        className={`${Style.logo} ${Style.logoSm}`}
-        src={LogoSm}
-        alt="Earlybird Logo"
-      />
+      <div className={Style.logoHolder}>
+        <img
+          className={`${Style.logo} ${Style.logoMd}`}
+          src={LogoMd}
+          alt="Earlybird Logo"
+        />
+        <img
+          className={`${Style.logo} ${Style.logoSm}`}
+          src={LogoSm}
+          alt="Earlybird Logo"
+        />
+      </div>
+      <div className={Style.headerItemsHolder}>
+        {children}
+      </div>
     </div>
+  );
+}
+
+export const HeaderItem: FC = () => {
+  return (
+    <div />
   );
 }

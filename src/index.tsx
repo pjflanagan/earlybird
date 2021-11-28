@@ -41,8 +41,10 @@ const App: FC = () => {
         {/* TODO: we probably will use redux here because managing an array of tweets might need it */}
         {/* <Provider store={store}>  */}
         <Routes>
-          <Route path="/login" element={<PageLogin />} />
-          <Route path={"/"} element={<PageMain />} />
+          <Route path="/">
+            <Route index element={<PageMain />} />
+            <Route path="login" element={<PageLogin />} />
+          </Route>
         </Routes>
         {/* </Provider> */}
       </Router>

@@ -6,13 +6,13 @@ import * as Helpers from './helpers';
 import './style.scss';
 
 type CalendarProps = {
+  selectedDay: Date;
   onChange: (newDate: Date) => void;
 }
 
 type CalendarState = {
   year: number;
   month: number;
-  selectedDay: number;
   monthDetails: Helpers.MonthDetails;
 }
 
@@ -20,29 +20,39 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
 
   constructor(props: CalendarProps) {
     super(props);
+    this.state = {
+      // selectedDay: Helpers.TODAY_TIMESTAMP,
+      ...this.getToday(),
+    }
+  }
+
+  getToday = (): CalendarState => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
-    this.state = {
+    return {
       year,
       month,
-      selectedDay: Helpers.TODAY_TIMESTAMP,
       monthDetails: Helpers.getMonthDetails(year, month)
     }
   }
 
   isSelectedDay = (day: Helpers.DayDetails): boolean => {
-    return day.timestamp === this.state.selectedDay;
+    return day.timestamp === this.props.selectedDay.getTime();
   }
 
-  onDateClick = (day: Helpers.DayDetails) => {
-    this.setState({ selectedDay: day.timestamp }, () => Helpers.setDateToInput(day.timestamp));
+  onDateClick = (day: Helpers.DayDetails): void => {
+    // this.setState({ selectedDay: day.timestamp }, () => Helpers.setDateToInput(day.timestamp));
     if (this.props.onChange) {
       this.props.onChange(new Date(day.timestamp));
     }
   }
 
-  setYear = (offset: number) => {
+  setToday = (): void => {
+    this.setState(this.getToday());
+  }
+
+  setYear = (offset: number): void => {
     const year = this.state.year + offset;
     const month = this.state.month;
     this.setState({
@@ -51,7 +61,7 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
     })
   }
 
-  setMonth = (offset: number) => {
+  setMonth = (offset: number): void => {
     let year = this.state.year;
     let month = this.state.month + offset;
     if (month === -1) {
@@ -70,7 +80,7 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
 
   // Render
 
-  renderDays() {
+  renderDays(): JSX.Element[] {
     const { monthDetails } = this.state;
     return monthDetails.map((day, index) => {
       const className = classNames('c-day-container', {
@@ -90,7 +100,7 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
     });
   }
 
-  renderCalendar() {
+  renderCalendar(): JSX.Element {
     return (
       <div className='c-container'>
         <div className='cc-head'>
@@ -103,7 +113,7 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
     )
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className='calendar'>
         <div className='mdp-container'>
@@ -118,7 +128,7 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
                 <span className='mdpchbi-left-arrow'></span>
               </div>
             </div>
-            <div className='mdpch-container'>
+            <div className='mdpch-container' onClick={() => this.setToday()}>
               <div className='mdpchc-year'>{this.state.year}</div>
               <div className='mdpchc-month'>{Helpers.getMonthStr(this.state.month)}</div>
             </div>

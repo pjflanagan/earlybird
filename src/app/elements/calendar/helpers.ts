@@ -6,9 +6,9 @@ export const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', '
 export const ONE_DAY = 60 * 60 * 24 * 1000;
 export const TODAY_TIMESTAMP = Date.now() - (Date.now() % ONE_DAY) + (new Date().getTimezoneOffset() * 1000 * 60);
 
-export const getMonthStr = (month: number) => MONTHS[Math.max(Math.min(11, month), 0)] || 'Month';
+export const getMonthStr = (month: number): string => MONTHS[Math.max(Math.min(11, month), 0)] || 'Month';
 
-export const getNumberOfDays = (year: number, month: number) => {
+export const getNumberOfDays = (year: number, month: number): number => {
   return 40 - new Date(year, month, 40).getDate();
 }
 
@@ -80,25 +80,21 @@ export const isCurrentDay = (day: DayDetails): boolean => {
   return day.timestamp === TODAY_TIMESTAMP;
 }
 
-export const getDateFromDateString = (dateValue: string) => {
-  const dateData = dateValue.split('-').map(d => parseInt(d, 10));
-  if (dateData.length < 3)
-    return null;
+// export const getDateFromDateString = (dateValue: string) => {
+//   const dateData = dateValue.split('-').map(d => parseInt(d, 10));
+//   if (dateData.length < 3)
+//     return null;
 
-  const year = dateData[0];
-  const month = dateData[1];
-  const date = dateData[2];
-  return { year, month, date };
-}
+//   const year = dateData[0];
+//   const month = dateData[1];
+//   const date = dateData[2];
+//   return { year, month, date };
+// }
 
+// export const getDateStringFromTimestamp = (timestamp: number) => {
+//   const dateObject = new Date(timestamp);
+//   const month = dateObject.getMonth() + 1;
+//   const date = dateObject.getDate();
+//   return dateObject.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (date < 10 ? '0' + date : date);
+// }
 
-export const getDateStringFromTimestamp = (timestamp: number) => {
-  const dateObject = new Date(timestamp);
-  const month = dateObject.getMonth() + 1;
-  const date = dateObject.getDate();
-  return dateObject.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (date < 10 ? '0' + date : date);
-}
-
-export const setDateToInput = (timestamp: number) => {
-  const dateString = getDateStringFromTimestamp(timestamp);
-}

@@ -74,7 +74,8 @@
     cursor: pointer;
     background: #fff;
 
-    &>span {
+    span,
+    span:after {
       border-color: $purple !important;
     }
   }
@@ -131,32 +132,41 @@
   top: -5px
 }
 
-
 .mdpch-container {
   float: left;
   width: 120px;
   height: 100%;
+  color: #fff;
+  background: $purple;
+  border-radius: 8px;
+
+  &:hover {
+    cursor: pointer;
+    background: #fff;
+    color: $purple;
+  }
+
+
+  .mdpchc-year {
+    float: left;
+    width: 100%;
+    height: 30px;
+    font-size: 27px;
+    font-weight: 200px;
+    text-align: center;
+  }
+
+  .mdpchc-month {
+    float: left;
+    width: 100%;
+    height: 15px;
+    font-size: 13px;
+    font-weight: 200px;
+    text-align: center;
+  }
+
 }
 
-.mdpchc-year {
-  float: left;
-  width: 100%;
-  height: 30px;
-  font-size: 27px;
-  color: #fff;
-  font-weight: 200px;
-  text-align: center;
-}
-
-.mdpchc-month {
-  float: left;
-  width: 100%;
-  height: 15px;
-  font-size: 13px;
-  color: #fff;
-  font-weight: 200px;
-  text-align: center;
-}
 
 /**
 *  Calendar
@@ -185,7 +195,7 @@
 .cc-month {
   height: 30px;
   width: 100%;
-  font-family: Roboto;
+  // font-family: Roboto;
   font-size: 16px;
   line-height: 30px;
   color: #fff;
@@ -224,23 +234,24 @@
   font-weight: 300;
   color: #fff;
   text-align: center;
+
+  span {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    font-weight: 300;
+    color: #fff;
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      background: #fff;
+      color: $purple;
+    }
+  }
 }
 
-.cdc-day span {
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
-  font-weight: 300;
-  color: #fff;
-  font-weight: bold;
-}
-
-.cdc-day span:hover {
-  cursor: pointer;
-  background: #fff;
-  color: $purple;
-}
-
+// TODO: not sure why this is out here
 .cdc-day span {
   width: 30px;
   height: 30px;

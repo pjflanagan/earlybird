@@ -87,6 +87,7 @@ export const PageMain: FC = () => {
             setTweet={setComposeTweet}
           />
           <Calendar
+            selectedDay={new Date()}
             onChange={(newDate: Date) => { console.log(newDate) }}
           />
         </ContainerLeft>

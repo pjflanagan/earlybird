@@ -11,6 +11,10 @@
   .logo {
     width: auto;
     height: 36px;
+
+    &.logoMd {
+      display: none;
+    }
   }
 }
 
@@ -24,6 +28,14 @@
       margin: 8px 16px;
       width: auto;
       height: 48px;
+
+      &.logoSm {
+        display: none;
+      }
+
+      &.logoMd {
+        display: inline;
+      }
     }
   }
 }

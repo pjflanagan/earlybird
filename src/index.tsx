@@ -22,9 +22,11 @@ import './style.scss';
 
 const theme = {
   rainbow: {
-      palette: {
-          brand: '#562fd8',
-      },
+    palette: {
+      brand: '#562fd8',
+      mainBackground: '#ecedff',
+      background: '#ecedff',
+    },
   },
 };
 
@@ -48,10 +50,12 @@ const App: FC = () => {
   );
 }
 
+console.log(process.env);
+
 ReactDOM.render(
   <Auth0Provider
-    domain="YOUR_DOMAIN"
-    clientId="YOUR_CLIENT_ID"
+    domain={process.env.REACT_APP_AUTH_0_DOMAIN || ''}
+    clientId={process.env.REACT_APP_AUTH_0_CLIENT_ID || ''}
     redirectUri={window.location.origin}
   >
     <App />,

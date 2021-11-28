@@ -25,6 +25,11 @@
       background: none;
       border-bottom: 1px solid #0002;
       font-size: 16px;
+
+      &::placeholder {
+        color: #0004;
+        font-size: 16px;
+      }
     }
   }
 

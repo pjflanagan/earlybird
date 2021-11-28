@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from 'react-rainbow-components';
 
 import { Header, Container } from 'app/elements';
 
@@ -11,10 +10,9 @@ export const PageLogin: FC = () => {
     <>
       <Header />
       <Container>
-        <Button
+        <button
           onClick={() => loginWithRedirect()}
-          label="Log in"
-        />
+        >Log in</button>
       </Container>
     </>
   )

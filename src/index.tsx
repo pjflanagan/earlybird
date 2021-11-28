@@ -3,7 +3,6 @@
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import { Application } from 'react-rainbow-components';
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import { PageMain, PageLogin } from 'app/pages';
@@ -11,28 +10,17 @@ import { PageMain, PageLogin } from 'app/pages';
 import * as serviceWorker from './serviceWorker';
 import './style.scss';
 
-const theme = {
-  rainbow: {
-    palette: {
-      brand: '#562fd8',
-      mainBackground: '#ecedff',
-      background: '#ecedff',
-    },
-  },
-};
 
 const App: FC = () => {
   return (
-    <Application theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="/">
-            <Route index element={<PageMain />} />
-            <Route path="login" element={<PageLogin />} />
-          </Route>
-        </Routes>
-      </Router>
-    </Application>
+    <Router>
+      <Routes>
+        <Route path="/">
+          <Route index element={<PageMain />} />
+          <Route path="login" element={<PageLogin />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 

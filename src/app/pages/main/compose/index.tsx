@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { Tweet } from 'app/utils';
 
+import { DateTimeToggleComponent } from './datetime';
 import Style from './style.module.scss';
 
 const COMPOSE_PLACEHOLDER_TEXT = `What's on your mind?`
@@ -24,12 +25,19 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
   setTweet,
 }) => {
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const setBody = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTweet({
       ...tweet,
       body: e.target.value
     });
   };
+
+  const setDate = (newDate: Date) => {
+    setTweet({
+      ...tweet,
+      date: newDate,
+    });
+  }
 
   return (
     <div className={Style.composeHolder}>
@@ -37,12 +45,15 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
         <textarea
           value={tweet?.body}
           placeholder={COMPOSE_PLACEHOLDER_TEXT}
-          onChange={handleChange}
+          onChange={setBody}
         />
       </div>
       <div className={Style.buttonHolder}>
         <div className={Style.dateTimeInputHolder}>
-          date
+          <DateTimeToggleComponent
+            date={tweet?.date}
+            setDate={setDate}
+          />
         </div>
         <div className={Style.actionHolder}>
           actions

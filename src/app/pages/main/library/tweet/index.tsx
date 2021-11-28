@@ -15,7 +15,14 @@ export const TweetComponent: FC<TweetComponentProps> = ({
   return (
     <div className={Style.tweetHolder}>
       <div className={Style.tweet}>
-        {tweet.body}
+        <div className={Style.bodyHolder}>
+          <div className={Style.body}>
+            {tweet.body}
+          </div>
+        </div>
+        <div className={Style.buttonHolder}>
+          actions
+        </div>
       </div>
     </div>
   )

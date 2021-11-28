@@ -1,11 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import { LibraryComponent } from './library';
+import { ComposeComponent } from './compose';
+
+// eslint-ignore
+// import { Provider } from 'react-redux';
+// import { createStore, applyMiddleware, compose } from 'redux';
+// import thunk from 'redux-thunk';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+
+// const { REACT_APP_ENV } = process.env;
+// const composeEnhancers = (REACT_APP_ENV === 'PRD') ? compose : composeWithDevTools;
 
 export const PageMain: FC = () => {
+
+  const [composeTweet, setComposeTweet] = useState<Tweet>();
+
+  // useEffect =>
+  // store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
   const tweets: Tweet[] = [
     {
@@ -57,9 +72,21 @@ export const PageMain: FC = () => {
 
   return (
     <>
+      {/* TODO: we probably will use redux here because managing an array of tweets might need it */}
+      {/* Or maybe when I do this it will just be in PageMain */}
+      {/* <Provider store={store}>  */}
       <Header />
       <Container>
-        <ContainerLeft>Compose Sidebar</ContainerLeft>
+        <ContainerLeft>
+          <ComposeComponent
+            tweet={composeTweet}
+            send={() => { console.log('send'); }}
+            remove={() => { console.log('remove'); }}
+            draft={() => { console.log('draft'); }}
+            schedule={() => { console.log('schedule'); }}
+            setTweet={setComposeTweet}
+          />
+        </ContainerLeft>
         <ContainerRight>
           <LibraryComponent tweets={tweets} />
         </ContainerRight>

@@ -20,16 +20,19 @@
 
 @media only screen and (min-width: 768px) {
   .container {
+    height: calc(100% - 64px);
+    position: fixed;
 
     .containerLeft {
-      width: 36%;
+      height: 100%;
+      width: 42%;
       border-right: 1px solid #0002;
       background: $white;
     }
 
     .containerRight {
-      width: 64%;
-      overflow: scroll;
+      height: 100%;
+      width: 58%;
     }
   }
 }

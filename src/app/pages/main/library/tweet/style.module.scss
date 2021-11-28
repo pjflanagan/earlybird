@@ -1,5 +1,5 @@
 .tweetHolder {
-  width: 100%;
+  width: calc(100% - 8px);
   height: 120px;
   padding: 4px;
 
@@ -17,7 +17,7 @@
 
       .body {
         border-bottom: 1px solid #0002;
-        height: 100%;
+        height: calc(100% - 12px);
         padding: 8px 0 4px;
       }
     }

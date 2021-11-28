@@ -1,12 +1,21 @@
 import React, { FC } from 'react';
+import classNames from 'classnames';
 
 import Style from './style.module.scss';
 
-export const Container: FC = ({
-  children
+type ContainerProps = {
+  className?: string;
+}
+
+export const Container: FC<ContainerProps> = ({
+  children,
+  className: classNameProp
 }) => {
+  const className = classNames(Style.container, {
+    [`${classNameProp}`]: classNameProp
+  })
   return (
-    <div className={Style.container}>
+    <div className={className}>
       {children}
     </div>
   );

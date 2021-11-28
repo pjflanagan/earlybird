@@ -1,6 +1,6 @@
 .libraryContainer {
-  width: 100%;
+  width: calc(100% - 8px);
   height: 100%;
   padding: 4px;
-  overflow: scroll;
+  overflow-x: scroll;
 }

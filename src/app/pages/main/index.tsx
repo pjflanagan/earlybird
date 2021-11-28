@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import { Header, Container, ContainerLeft, ContainerRight, Calendar } from 'app/elements';
+import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import { LibraryComponent } from './library';
@@ -85,10 +85,6 @@ export const PageMain: FC = () => {
             draft={() => { console.log('draft'); }}
             schedule={() => { console.log('schedule'); }}
             setTweet={setComposeTweet}
-          />
-          <Calendar
-            selectedDay={new Date()}
-            onChange={(newDate: Date) => { console.log(newDate) }}
           />
         </ContainerLeft>
         <ContainerRight>

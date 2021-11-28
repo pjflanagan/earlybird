@@ -24,15 +24,13 @@ const App: FC = () => {
   );
 }
 
-console.log(process.env);
-
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH_0_DOMAIN!}
     clientId={process.env.REACT_APP_AUTH_0_CLIENT_ID!}
     redirectUri={window.location.origin}
   >
-    <App />,
+    <App />
   </Auth0Provider>,
   document.getElementById('root')
 );

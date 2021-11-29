@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Header, Container } from 'app/elements';
+import { Header, Container, Button } from 'app/elements';
 
 import { Background } from './background';
 
@@ -15,13 +15,15 @@ export const PageLogin: FC = () => {
       <Header />
       <Container className={Style.container}>
         <div className={Style.promptHolder}>
-          Tweet from whenever you want to!
-          <div
+          <span className={Style.title}>
+            Tweet from whenever you want to!
+          </span>
+          <Button
             className={Style.button}
             onClick={() => loginWithRedirect()}
-          >
-            Log in with Twitter
-          </div>
+            icon="twitter"
+            label="Log in with Twitter"
+          />
         </div>
         <Background />
       </Container>

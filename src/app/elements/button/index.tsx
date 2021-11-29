@@ -12,6 +12,7 @@ type ButtonProps = {
   label?: string;
   className?: string;
   inactive?: boolean;
+  expandable?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -20,7 +21,9 @@ export const Button: FC<ButtonProps> = ({
   icon,
   label,
   className: classNameProps,
-  inactive
+  inactive,
+  children,
+  expandable
 }) => {
 
   const className = classNames(Style.button, {
@@ -28,22 +31,34 @@ export const Button: FC<ButtonProps> = ({
     [`${classNameProps}`]: classNameProps,
     [Style.inactive]: inactive,
     [Style.labeledButton]: label,
+    [Style.expandable]: expandable
   });
 
   return (
     <div
       className={className}
-      onClick={onClick}
     >
-      <div className={Style.iconHolder}>
+      <div
+        className={Style.iconHolder}
+        onClick={onClick}
+      >
         {getIcon(icon)}
       </div>
       {
         label && (
-          <div className={Style.labelHolder}>
+          <div
+            className={Style.labelHolder}
+            onClick={onClick}
+          >
             {label}
           </div>
         )
+      }
+      {
+        !!children &&
+        <div className={Style.childrenHolder}>
+          {children}
+        </div>
       }
     </div>
   );

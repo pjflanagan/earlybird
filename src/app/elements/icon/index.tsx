@@ -17,5 +17,6 @@ export const getIcon = (iconName: string): JSX.Element => {
     clock: <BiAlarm />,
     calendar: <BiCalendar />,
     send: <GrSend />,
+    twitter: <GrTwitter />,
   }[iconName] || <GrTwitter />;
 }

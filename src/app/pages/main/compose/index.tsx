@@ -88,8 +88,8 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
             <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} />
             {
               tweet?.date ?
-                <Button disabled={!canSend(tweet)} className={Style.button} icon="clock" onClick={schedule} /> :
-                <Button disabled={!canSchedule(tweet)} className={Style.button} icon="save" onClick={draft} />
+                <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} /> :
+                <Button disabled={!canSend(tweet)} className={Style.button} icon="save" onClick={draft} />
             }
           </div>
         </Display>

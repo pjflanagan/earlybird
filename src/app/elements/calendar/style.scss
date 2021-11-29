@@ -3,6 +3,7 @@
 .calendar {
   float: left;
   position: relative;
+  min-height: 360px;
 }
 
 .calendar * {
@@ -22,14 +23,10 @@
 
 .mdp-container {
   float: left;
-  position: absolute;
   left: 0;
-  top: 40px;
-  width: 300px;
+  width: 100%;
   min-height: 350px;
-  background: $purple;
   overflow: hidden;
-  padding: 25px 30px;
 }
 
 .mdpc-head {

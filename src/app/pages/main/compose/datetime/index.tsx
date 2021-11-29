@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import classNames from 'classnames';
 
 import { Button, Calendar } from 'app/elements';
 
-import Style from './style.module.scss';
-
-const DEFAULT_DATE = new Date(new Date().getDate() + 1);
+const TODAY = new Date();
+const DEFAULT_DATE = new Date(TODAY.getTime() + 86400 * 1000);
 
 type DateTimeToggleComponent = {
   date?: Date;
@@ -14,6 +14,16 @@ type DateTimeToggleComponent = {
 // TODO: this is two parts
 // it's a button that appears to expand into a datetime holder
 // which on hover appears to expand into an absolute positioned calendar picker
+
+const formatDate = (date: Date | undefined): string | undefined => {
+  return date?.toLocaleString('en-US', {
+    day: 'numeric',
+    year: 'numeric',
+    month: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+}
 
 export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
   date,
@@ -30,21 +40,13 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
       icon="calendar"
       inactive={!date}
       onClick={toggleDate}
-      label={date?.toLocaleString('en-US', {
-        // weekday: 'short', // long, short, narrow
-        day: 'numeric', // numeric, 2-digit
-        year: 'numeric', // numeric, 2-digit
-        month: 'short', // numeric, 2-digit, long, short, narrow
-        hour: 'numeric', // numeric, 2-digit
-        minute: 'numeric', // numeric, 2-digit
-        // second: 'numeric', // numeric, 2-digit
-      })}
-    />
-    // <div className={Style.dateTimeButtonExpanded}>
-    //   <Calendar
-    //     selectedDay={date || new Date()}
-    //     onChange={setDate}
-    //   />
-    // </div>
+      label={formatDate(date)}
+      expandable
+    >
+      <Calendar
+        selectedDay={date || new Date()}
+        onChange={setDate}
+      />
+    </Button>
   );
 };

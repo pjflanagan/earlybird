@@ -3,14 +3,18 @@
 .button {
   display: flex;
   height: 54px;
+  max-height: 54px;
   width: 54px;
   background: $purple;
-  border-radius: 54px;
-  cursor: pointer;
-  transition: background 0.2s;
+  border-radius: 28px;
+  transition: background 0.2s, width 0.2s, max-height 0.2s;
+  user-select: none;
+  overflow: hidden;
+  flex-wrap: wrap;
 
   &.labeledButton {
     width: 274px;
+    overflow: hidden;
   }
 
   &.inactive,
@@ -29,11 +33,27 @@
   }
 
   &.disabled {
-    cursor: default;
+    .iconHolder {
+      cursor: default;
+    }
+
+    .labelHolder {
+      cursor: default;
+    }
   }
 
   &:hover {
     background: $darkPurple;
+
+    &.expandable {
+      height: auto;
+      max-height: 560px;
+
+      &.inactive {
+        height: 54px;
+        max-height: 54px;
+      }
+    }
 
     &.inactive {
       .iconHolder {
@@ -55,8 +75,9 @@
   }
 
   .iconHolder {
+    cursor: pointer;
     width: 54px;
-    height: 100%;
+    height: 54px;
 
     svg {
       color: $white;
@@ -71,8 +92,15 @@
   }
 
   .labelHolder {
+    cursor: pointer;
     width: 220px;
+    min-width: 220px;
     padding: 18px 0;
     color: $white;
+  }
+
+  .childrenHolder {
+    width: 100%;
+    height: auto;
   }
 }

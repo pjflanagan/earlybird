@@ -12,21 +12,16 @@
     height: 180px;
     text-align: center;
     color: #fff;
-    font-size: 36px;
+
+    .title {
+      font-size: 36px;
+    }
+
+    .prompt {}
 
     .button {
       background: $twitter;
-      width: 180px;
-      border-radius: 36px;
-      padding: 12px 36px;
-      font-size: 14px;
       margin: 12px auto;
-      cursor: pointer;
-      transition: background 0.2s;
-
-      &:hover {
-        background: $twitterDark;
-      }
     }
   }
 }

@@ -1,0 +1,46 @@
+.sm {
+  display: inline;
+}
+
+.md {
+  display: none;
+}
+
+.lg {
+  display: none;
+}
+
+.xl {
+  display: none;
+}
+
+@media only screen and (min-width: 580px) {
+  .sm {
+    display: none;
+  }
+
+  .md {
+    display: inline;
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+  .md {
+    display: none;
+  }
+
+  .lg {
+    display: inline;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .lg {
+    display: none;
+  }
+
+  .xl {
+    display: inline;
+  }
+}

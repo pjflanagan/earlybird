@@ -1,20 +1,33 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
 
+import { getIcon } from '../icon';
+
 import Style from './style.module.scss';
 
 type ButtonProps = {
+  icon: string;
   onClick: () => void;
   disabled?: boolean;
+  label?: string;
+  className?: string;
+  inactive?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
   onClick,
-  disabled
+  disabled,
+  icon,
+  label,
+  className: classNameProps,
+  inactive
 }) => {
 
   const className = classNames(Style.button, {
-    [Style.disabled]: disabled
+    [Style.disabled]: disabled,
+    [`${classNameProps}`]: classNameProps,
+    [Style.inactive]: inactive,
+    [Style.labeledButton]: label,
   });
 
   return (
@@ -22,7 +35,16 @@ export const Button: FC<ButtonProps> = ({
       className={className}
       onClick={onClick}
     >
-      {/* TODO: icon */}
+      <div className={Style.iconHolder}>
+        {getIcon(icon)}
+      </div>
+      {
+        label && (
+          <div className={Style.labelHolder}>
+            {label}
+          </div>
+        )
+      }
     </div>
-  )
+  );
 }

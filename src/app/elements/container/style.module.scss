@@ -1,7 +1,7 @@
 @import 'app/theme.scss';
 
 .container {
-  margin-top: 64px;
+  margin-top: 36px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -20,19 +20,27 @@
 
 @media only screen and (min-width: 768px) {
   .container {
+    margin-top: 64px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .container {
+    margin-top: 64px;
     height: calc(100% - 64px);
     position: fixed;
 
     .containerLeft {
       height: 100%;
-      width: calc(42% - 1px);
+      width: calc(52% - 1px);
       border-right: 1px solid #0002;
       background: $white;
     }
 
     .containerRight {
       height: 100%;
-      width: 58%;
+      width: 48%;
+      max-width: 550px;
     }
   }
 }

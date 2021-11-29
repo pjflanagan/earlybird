@@ -1,3 +1,78 @@
 @import 'app/theme.scss';
 
-.button {}
+.button {
+  display: flex;
+  height: 54px;
+  width: 54px;
+  background: $purple;
+  border-radius: 54px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &.labeledButton {
+    width: 274px;
+  }
+
+  &.inactive,
+  &.disabled {
+    background: none;
+
+    .iconHolder {
+      svg {
+        color: $purple;
+
+        path {
+          stroke: $purple;
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+  }
+
+  &:hover {
+    background: $darkPurple;
+
+    &.inactive {
+      .iconHolder {
+        svg {
+          color: $white;
+
+          path {
+            stroke: $white;
+          }
+        }
+
+      }
+    }
+
+    &.disabled {
+      cursor: default;
+      background: none;
+    }
+  }
+
+  .iconHolder {
+    width: 54px;
+    height: 100%;
+
+    svg {
+      color: $white;
+      height: 28px;
+      width: 28px;
+      margin: 13px;
+
+      path {
+        stroke: $white;
+      }
+    }
+  }
+
+  .labelHolder {
+    width: 220px;
+    padding: 18px 0;
+    color: $white;
+  }
+}

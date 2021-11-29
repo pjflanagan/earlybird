@@ -1,12 +1,39 @@
 import React, { FC } from 'react';
 
-import { Button } from 'app/elements';
+import { Button, Display } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import { DateTimeToggleComponent } from './datetime';
 import Style from './style.module.scss';
 
-const COMPOSE_PLACEHOLDER_TEXT = `What's on your mind?`
+const COMPOSE_PLACEHOLDER_TEXT = `What's on your mind?`;
+
+const canCancel = (tweet: Tweet | undefined): boolean => {
+  if (!tweet) {
+    return false;
+  } else if (tweet.id) {
+    return true;
+  } else if (tweet.body) {
+    return tweet.body.length > 0;
+  }
+  return false;
+}
+
+const canSend = (tweet: Tweet | undefined): boolean => {
+  if (!tweet) {
+    return false;
+  } else if (tweet.body) {
+    return tweet.body.length > 0;
+  }
+  return false;
+}
+
+const canSchedule = (tweet: Tweet | undefined): boolean => {
+  if (!tweet) {
+    return false;
+  }
+  return canSend(tweet) && !!tweet.date;
+}
 
 type ComposeComponentProps = {
   tweet?: Tweet;
@@ -33,7 +60,7 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
     });
   };
 
-  const setDate = (newDate: Date) => {
+  const setDate = (newDate: Date | undefined) => {
     setTweet({
       ...tweet,
       date: newDate,
@@ -56,12 +83,24 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
             setDate={setDate}
           />
         </div>
-        <div className={Style.actionHolder}>
-          <Button onClick={remove} />
-          <Button onClick={draft} />
-          <Button onClick={schedule} />
-          <Button onClick={send} />
-        </div>
+        <Display size="sm" className={Style.actionDisplayer}>
+          <div className={Style.actionHolder}>
+            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} />
+            {
+              tweet?.date ?
+                <Button disabled={!canSend(tweet)} className={Style.button} icon="clock" onClick={schedule} /> :
+                <Button disabled={!canSchedule(tweet)} className={Style.button} icon="save" onClick={draft} />
+            }
+          </div>
+        </Display>
+        <Display size={['md', 'lg', 'xl']} className={Style.actionDisplayer}>
+          <div className={Style.actionHolder}>
+            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} />
+            <Button disabled={!canSend(tweet)} className={Style.button} icon="save" onClick={draft} />
+            <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} />
+            <Button disabled={!canSend(tweet)} className={Style.button} icon="send" onClick={send} />
+          </div>
+        </Display>
       </div>
     </div>
   )

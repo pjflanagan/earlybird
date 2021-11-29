@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import { Button } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import { DateTimeToggleComponent } from './datetime';
@@ -56,11 +57,10 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
           />
         </div>
         <div className={Style.actionHolder}>
-          actions
-          {/* remove */}
-          {/* draft */}
-          {/* schedule */}
-          {/* send */}
+          <Button onClick={remove} />
+          <Button onClick={draft} />
+          <Button onClick={schedule} />
+          <Button onClick={send} />
         </div>
       </div>
     </div>

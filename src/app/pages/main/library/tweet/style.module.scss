@@ -24,7 +24,8 @@
 
     .actionRow {
       height: 40px;
-      width: 100%;
+      margin: 0 20px;
+      width: calc(100% - 40px);
       display: flex;
 
       .labelHolder {
@@ -36,6 +37,10 @@
         width: 50%;
         display: flex;
         justify-content: right;
+
+        .nub {
+          margin: 4px 0 4px 16px;
+        }
       }
     }
   }

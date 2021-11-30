@@ -4,6 +4,7 @@ import {
   BiTrash,
   BiAlarm,
   BiCalendar,
+  BiPencil,
 } from 'react-icons/bi';
 import {
   GrSend,
@@ -18,5 +19,6 @@ export const getIcon = (iconName: string): JSX.Element => {
     calendar: <BiCalendar />,
     send: <GrSend />,
     twitter: <GrTwitter />,
+    pencil: <BiPencil />
   }[iconName] || <GrTwitter />;
 }

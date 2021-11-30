@@ -24,9 +24,9 @@ export const TweetComponent: FC<TweetComponentProps> = ({
         <div className={Style.actionRow}>
           <div className={Style.labelHolder}></div>
           <div className={Style.nubHolder}>
-            <Nub icon="" onClick={() => { console.log() }} />
-            <Nub icon="" onClick={() => { console.log() }} />
-            <Nub icon="" onClick={() => { console.log() }} />
+            <Nub className={Style.nub} icon="trash" onClick={() => { console.log() }} />
+            <Nub className={Style.nub} icon="pencil" onClick={() => { console.log() }} />
+            <Nub className={Style.nub} icon="send" onClick={() => { console.log() }} />
           </div>
         </div>
       </div>

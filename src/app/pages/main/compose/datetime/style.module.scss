@@ -1,0 +1,35 @@
+@import 'app/theme.scss';
+
+.calendarButton {
+  width: 274px;
+
+  &.inactive {
+    width: 54px;
+    background: none;
+
+    .iconHolder {
+      svg {
+        color: $purple;
+
+        path {
+          stroke: $purple;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    height: auto;
+    max-height: 560px;
+
+    &.inactive {
+      height: 54px;
+      max-height: 54px;
+    }
+  }
+
+  .calendarHolder {
+    width: 100%;
+    height: auto;
+  }
+}

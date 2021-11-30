@@ -7,13 +7,17 @@ import Style from './style.module.scss';
 
 type HeaderProps = {
   children?: JSX.Element;
+  logoLargeColor?: 'purple' | 'white';
+  headerBackgroundColor?: 'clear' | 'default';
 }
 
 export const Header: FC<HeaderProps> = ({
-  children
+  children,
+  logoLargeColor = 'purple',
+  headerBackgroundColor = 'default'
 }) => {
   return (
-    <div className={Style.header}>
+    <div className={`${Style.header} ${Style[headerBackgroundColor]}`}>
       <div className={Style.logoHolder}>
         <img
           className={`${Style.logo} ${Style.logoMd}`}
@@ -21,7 +25,7 @@ export const Header: FC<HeaderProps> = ({
           alt="Earlybird Logo"
         />
         <img
-          className={`${Style.logo} ${Style.logoSm}`}
+          className={`${Style.logo} ${Style.logoSm} ${Style[logoLargeColor]}`}
           src={LogoSm}
           alt="Earlybird Logo"
         />

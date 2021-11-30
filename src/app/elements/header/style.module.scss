@@ -20,7 +20,6 @@
 
 @media only screen and (min-width: 768px) {
   .header {
-    background: $white;
     height: 64px;
     border-bottom: 1px solid #0002;
 
@@ -28,6 +27,7 @@
       margin: 8px 16px;
       width: auto;
       height: 48px;
+      filter: grayscale(1) brightness(100);
 
       &.logoSm {
         display: none;
@@ -36,6 +36,16 @@
       &.logoMd {
         display: inline;
       }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .header {
+    background: $white;
+
+    .logo {
+      filter: none;
     }
   }
 }

@@ -71,7 +71,7 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
     <div className={Style.composeHolder}>
       <div className={Style.inputHolder}>
         <textarea
-          value={tweet?.body}
+          value={tweet?.body || ''}
           placeholder={COMPOSE_PLACEHOLDER_TEXT}
           onChange={setBody}
         />

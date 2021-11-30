@@ -5,3 +5,4 @@ export * from './calendar';
 export * from './button';
 export * from './icon';
 export * from './display';
+export * from './nub';

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 
+import { Nub } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import Style from './style.module.scss';
@@ -20,8 +21,13 @@ export const TweetComponent: FC<TweetComponentProps> = ({
             {tweet.body}
           </div>
         </div>
-        <div className={Style.buttonHolder}>
-          actions
+        <div className={Style.actionRow}>
+          <div className={Style.labelHolder}></div>
+          <div className={Style.nubHolder}>
+            <Nub icon="" onClick={() => { console.log() }} />
+            <Nub icon="" onClick={() => { console.log() }} />
+            <Nub icon="" onClick={() => { console.log() }} />
+          </div>
         </div>
       </div>
     </div>

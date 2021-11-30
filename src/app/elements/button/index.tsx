@@ -5,14 +5,77 @@ import { getIcon } from '../icon';
 
 import Style from './style.module.scss';
 
+// TODO: simplify this, move a lot of the logic to a specific calendar input
+
+type ButtonIconProps = {
+  icon: string;
+  onClick: () => void;
+  className?: string;
+}
+
+
+export const ButtonIcon: FC<ButtonIconProps> = ({
+  onClick,
+  icon,
+  className
+}) => {
+  return (
+    <div
+      className={`${Style.iconHolder} ${className}`}
+      onClick={onClick}
+    >
+      {getIcon(icon)}
+    </div>
+  );
+};
+
+type ButtonLabelProps = {
+  onClick?: () => void;
+}
+
+export const ButtonLabel: FC<ButtonLabelProps> = ({
+  children,
+  onClick
+}) => {
+  return (
+    <div
+      className={Style.labelHolder}
+      onClick={onClick}
+    >
+      {children}
+    </div>
+  );
+};
+
+type ButtonFrameProps = {
+  className?: string;
+  disabled?: boolean;
+}
+
+export const ButtonFrame: FC<ButtonFrameProps> = ({
+  children,
+  className: classNameProp,
+  disabled
+}) => {
+  const className = classNames(Style.button, {
+    [Style.disabled]: disabled,
+    [`${classNameProp}`]: classNameProp,
+  });
+
+  return (
+    <div className={className}>
+      {children}
+    </div>
+  )
+}
+
+
 type ButtonProps = {
   icon: string;
   onClick: () => void;
   disabled?: boolean;
   label?: string;
   className?: string;
-  inactive?: boolean;
-  expandable?: boolean;
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -20,46 +83,23 @@ export const Button: FC<ButtonProps> = ({
   disabled,
   icon,
   label,
-  className: classNameProps,
-  inactive,
-  children,
-  expandable
+  className: classNameProp,
 }) => {
 
   const className = classNames(Style.button, {
-    [Style.disabled]: disabled,
-    [`${classNameProps}`]: classNameProps,
-    [Style.inactive]: inactive,
+    [`${classNameProp}`]: classNameProp,
     [Style.labeledButton]: label,
-    [Style.expandable]: expandable
   });
 
   return (
-    <div
+    <ButtonFrame
+      disabled={disabled}
       className={className}
     >
-      <div
-        className={Style.iconHolder}
-        onClick={onClick}
-      >
-        {getIcon(icon)}
-      </div>
+      <ButtonIcon icon={icon} onClick={onClick} />
       {
-        label && (
-          <div
-            className={Style.labelHolder}
-            onClick={onClick}
-          >
-            {label}
-          </div>
-        )
+        label && <ButtonLabel onClick={onClick}>{label}</ButtonLabel>
       }
-      {
-        !!children &&
-        <div className={Style.childrenHolder}>
-          {children}
-        </div>
-      }
-    </div>
+    </ButtonFrame>
   );
 }

@@ -22,10 +22,21 @@
       }
     }
 
-    // TODO: this is a bad name
-    .buttonHolder {
+    .actionRow {
       height: 40px;
       width: 100%;
+      display: flex;
+
+      .labelHolder {
+        width: 50%;
+      }
+
+      .nubHolder {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: right;
+      }
     }
   }
 }

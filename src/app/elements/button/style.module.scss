@@ -17,24 +17,20 @@
     overflow: hidden;
   }
 
-  &.inactive,
   &.disabled {
+    pointer-events: none;
     background: none;
 
     .iconHolder {
+      cursor: default;
+
       svg {
-        color: $purple;
+        color: #0006;
 
         path {
-          stroke: $purple;
+          stroke: #0006;
         }
       }
-    }
-  }
-
-  &.disabled {
-    .iconHolder {
-      cursor: default;
     }
 
     .labelHolder {
@@ -44,29 +40,6 @@
 
   &:hover {
     background: $darkPurple;
-
-    &.expandable {
-      height: auto;
-      max-height: 560px;
-
-      &.inactive {
-        height: 54px;
-        max-height: 54px;
-      }
-    }
-
-    &.inactive {
-      .iconHolder {
-        svg {
-          color: $white;
-
-          path {
-            stroke: $white;
-          }
-        }
-
-      }
-    }
 
     &.disabled {
       cursor: default;
@@ -99,8 +72,4 @@
     color: $white;
   }
 
-  .childrenHolder {
-    width: 100%;
-    height: auto;
-  }
 }

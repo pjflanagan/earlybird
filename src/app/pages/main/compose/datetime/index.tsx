@@ -1,7 +1,10 @@
-import React, { FC, useState } from 'react';
-import classNames from 'classnames';
+import React, { FC } from 'react'; // useState
+// import classNames from 'classnames';
 
-import { Button, Calendar } from 'app/elements';
+import { ButtonFrame, ButtonIcon, ButtonLabel, Calendar } from 'app/elements';
+
+import Style from './style.module.scss';
+import classNames from 'classnames';
 
 const TODAY = new Date();
 const DEFAULT_DATE = new Date(TODAY.getTime() + 86400 * 1000);
@@ -35,18 +38,22 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
     setDate(newDate);
   }
 
+  const className = classNames(Style.calendarButton, {
+    [Style.inactive]: !date,
+  });
+
   return (
-    <Button
-      icon="calendar"
-      inactive={!date}
-      onClick={toggleDate}
-      label={formatDate(date)}
-      expandable
+    <ButtonFrame
+      className={className}
     >
-      <Calendar
-        selectedDay={date || new Date()}
-        onChange={setDate}
-      />
-    </Button>
+      <ButtonIcon className={Style.iconHolder} icon="calendar" onClick={toggleDate} />
+      <ButtonLabel>{formatDate(date)}</ButtonLabel>
+      <div className={Style.calendarHolder}>
+        <Calendar
+          selectedDay={date || new Date()}
+          onChange={setDate}
+        />
+      </div>
+    </ButtonFrame>
   );
 };

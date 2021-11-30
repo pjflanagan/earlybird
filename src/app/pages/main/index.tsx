@@ -68,7 +68,12 @@ export const PageMain: FC = () => {
       date: new Date(),
       body: 'tweet text here'
     },
-  ]
+  ];
+
+  const remove = () => {
+    // TODO: re-add to the library
+    setComposeTweet(undefined);
+  }
 
   return (
     <>
@@ -81,7 +86,7 @@ export const PageMain: FC = () => {
           <ComposeComponent
             tweet={composeTweet}
             send={() => { console.log('send'); }}
-            remove={() => { console.log('remove'); }}
+            remove={remove}
             draft={() => { console.log('draft'); }}
             schedule={() => { console.log('schedule'); }}
             setTweet={setComposeTweet}

@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Header, Container, Button } from 'app/elements';
-
-import { Background } from './background';
+import { Header, Container, Button, Background } from 'app/elements';
 
 import Style from './style.module.scss';
 
@@ -12,12 +10,15 @@ export const PageLogin: FC = () => {
 
   return (
     <>
-      <Header />
+      <Header clear />
       <Container className={Style.container}>
         <div className={Style.promptHolder}>
-          <span className={Style.title}>
+          <div className={Style.title}>
             Tweet from whenever you want to!
-          </span>
+          </div>
+          <div className={Style.subTitle}>
+            Earlybird helps manage your drafted and scheduled tweets.
+          </div>
           <Button
             className={Style.button}
             onClick={() => loginWithRedirect()}
@@ -25,8 +26,8 @@ export const PageLogin: FC = () => {
             label="Log in with Twitter"
           />
         </div>
-        <Background />
       </Container>
+      <Background />
     </>
   )
 }

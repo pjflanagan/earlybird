@@ -7,14 +7,23 @@
   background: $purple;
   z-index: 100;
   box-shadow: 0px 4px 14px #0001;
+  display: flex;
 
-  .logo {
-    width: auto;
-    height: 36px;
+  .logoHolder {
+    width: 50%;
 
-    &.logoMd {
-      display: none;
+    .logo {
+      width: auto;
+      height: 36px;
+
+      &.logoMd {
+        display: none;
+      }
     }
+  }
+
+  .headerItemsHolder {
+    width: 50%;
   }
 }
 
@@ -23,18 +32,26 @@
     height: 64px;
     border-bottom: 1px solid #0002;
 
-    .logo {
-      margin: 8px 16px;
-      width: auto;
-      height: 48px;
-      filter: grayscale(1) brightness(100);
+    &.clear {
+      background: #0000;
+      box-shadow: none;
+      border: none;
+    }
 
-      &.logoSm {
-        display: none;
-      }
+    .logoHolder {
+      .logo {
+        margin: 8px 16px;
+        width: auto;
+        height: 48px;
+        filter: grayscale(1) brightness(100);
 
-      &.logoMd {
-        display: inline;
+        &.logoSm {
+          display: none;
+        }
+
+        &.logoMd {
+          display: inline;
+        }
       }
     }
   }
@@ -44,8 +61,19 @@
   .header {
     background: $white;
 
-    .logo {
-      filter: none;
+    &.clear {
+      .logoHolder {
+        .logo {
+          filter: grayscale(1) brightness(100);
+        }
+      }
     }
+
+    .logoHolder {
+      .logo {
+        filter: none;
+      }
+    }
+
   }
 }

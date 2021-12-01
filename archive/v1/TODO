@@ -1,0 +1,10 @@
+
+- [ ] Mongodb stitch does not have login with twitter but does have scheduled functions, could move to there
+- [ ] Filter feature on the top next to schedule and draft 
+- [ ] Use validate to hash the tweet in the update function as well
+- [ ] https://elements.heroku.com/addons/scheduler use heroku scheduler rather than a constantly running worker and make tweets schedule around every 10 minutes (represent change in from end too)
+- [ ] Layout should be a left side panel for the tweet, time, calendar, actions, and length. Right side should be schedule and drafts header tabs with tweets in order underneath. Tweets should be lengthwise boxes starting with date then time then content 
+- [ ] OR: Login Twitter then attach Buffer to create scheduled tweet
+    - [ ] With the Buffer API, this app could be free for me and just use hobby dynos (no https)
+    - [ ] Blue for twitter draft, purple for early bird draft, black for buffer scheduled 
+- [ ] https://github.com/sh4nks/flask-emoji

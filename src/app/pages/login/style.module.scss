@@ -17,15 +17,23 @@
 
     .title {
       font-size: 36px;
+      text-shadow: 0 4px 12px #0004;
     }
 
     .subTitle {
       font-size: 18px;
+      text-shadow: 0 4px 12px #0004;
     }
 
     .button {
       background: $twitter;
       margin: 12px auto;
+      width: 246px;
+      box-shadow: 0 8px 28px #0004;
+
+      &:hover {
+        background: $twitterDark;
+      }
     }
   }
 }

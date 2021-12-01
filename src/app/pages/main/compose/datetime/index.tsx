@@ -47,7 +47,10 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
       className={className}
     >
       <ButtonIcon className={Style.iconHolder} icon="calendar" onClick={toggleDate} />
-      <ButtonLabel>{formatDate(date)}</ButtonLabel>
+      <ButtonLabel className={Style.labelHolder}>
+        {/* <input type="datetime-local" value={date?.toDateString()} /> */}
+        {formatDate(date)}
+      </ButtonLabel>
       <div className={Style.calendarHolder}>
         <Calendar
           selectedDay={date || new Date()}

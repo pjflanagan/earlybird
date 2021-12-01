@@ -26,8 +26,8 @@ export const PageLogin: FC = () => {
             label="Log in with Twitter"
           />
         </div>
+        <Background />
       </Container>
-      <Background />
     </>
   )
 }

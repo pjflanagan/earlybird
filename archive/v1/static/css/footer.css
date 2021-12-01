@@ -1,0 +1,48 @@
+div.footer.sub {
+	width: 100%;
+	background: #3716a0;
+	color: #FFF;
+	text-align: center;
+	padding: 20px;
+	height: 60px;
+	margin-top: 30px;
+	font-size: 12px;
+}
+div.footer.sub a {
+	color: #FFF;
+	text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px) {
+	
+}
+
+@media only screen and (min-width: 992px) {
+	div.footer.main {
+		width: 100%;
+		height: 120px;
+		background: #572ed8;
+		color: #FFF;
+		margin-top: 30px;
+		font-size: 12px;
+	}
+	div.footer.main div.row {
+		width: 100%;
+		margin-left: 0px;
+	}
+	div.footer.main div.row div.col {
+		padding: 20px;
+	}
+	div.footer.main div.row div.col p {
+		margin: 0;
+	}
+	div.footer.main div.row div.col p a {
+		color: #FFF;
+		text-decoration: underline;
+	}
+	div.footer.sub {
+		margin-top: 0px;
+		height: 40px;
+		padding: 10px;
+	}
+}	

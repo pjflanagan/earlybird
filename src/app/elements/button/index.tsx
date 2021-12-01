@@ -30,15 +30,17 @@ export const ButtonIcon: FC<ButtonIconProps> = ({
 
 type ButtonLabelProps = {
   onClick?: () => void;
+  className?: string;
 }
 
 export const ButtonLabel: FC<ButtonLabelProps> = ({
   children,
-  onClick
+  onClick,
+  className,
 }) => {
   return (
     <div
-      className={Style.labelHolder}
+      className={`${Style.labelHolder} ${className}`}
       onClick={onClick}
     >
       {children}

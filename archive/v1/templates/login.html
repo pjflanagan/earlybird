@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<link rel="stylesheet" href="/static/css/login.css" />
+<div class="site-wrapper">
+	<div class="site-wrapper-inner">
+		<div class="cover-container">
+
+			<div class="masthead clearfix">
+				<div class="inner">
+					<img class="masthead-brand"
+						src="https://s3.amazonaws.com/early-bird-twitter-files/assets/header-lg.png" />
+				</div>
+			</div>
+
+			<div class="inner cover">
+				<!--h1 class="cover-heading">earlybird has flown south!</h1>
+				<p class="lead cover-body">Thank you everyone for making this experiment possible. I've been focusing on new projects, so keep a lookout for them
+					in the future.</p-->
+
+				<h1 class="cover-heading">Tweet whenever you want, right now!</h1>
+				<p class="lead cover-body">Earlybird is a simple and free tweet scheduling app. Just sign in with your
+					Twitter
+					account and let Earlybird draft and schedule your tweets!</p>
+				<p class="lead">
+					<a href="/twitter/login" class="btn btn-lg btn-secondary">
+						{% include 'svg/twitter.svg' %} Login with Twitter
+					</a>
+				</p>
+			</div>
+
+			<div class="mastfoot">
+				<div class="inner">
+					<p>Created by
+						<a href="https://twitter.com/PeterJFlan">@PeterJFlan</a>.</p>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endblock %}

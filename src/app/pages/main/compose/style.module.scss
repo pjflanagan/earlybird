@@ -46,6 +46,7 @@
 
     .actionDisplayer {
       width: 50%;
+      min-width: calc(61px * 3);
 
       .actionHolder {
         display: flex;
@@ -74,11 +75,7 @@
   .composeHolder {
     .buttonHolder {
       .actionDisplayer {
-        .actionHolder {
-          .button {
-            margin: 4px;
-          }
-        }
+        min-width: calc(61px * 5);
       }
     }
   }

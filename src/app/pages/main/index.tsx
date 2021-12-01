@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
 import { Tweet } from 'app/utils';
@@ -6,94 +7,108 @@ import { Tweet } from 'app/utils';
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
 
-// eslint-ignore
-// import { Provider } from 'react-redux';
-// import { createStore, applyMiddleware, compose } from 'redux';
-// import thunk from 'redux-thunk';
-// import { composeWithDevTools } from 'redux-devtools-extension';
+const TWEETS: Tweet[] = [
+  {
+    id: 'a',
+    date: new Date(),
+    body: 'its funny how lol am i right'
+  },
+  {
+    id: 'b',
+    date: undefined,
+    body: 'cancelled'
+  },
+  {
+    id: 'c',
+    date: undefined,
+    body: 'you tellin me a shrimp fried this rice'
+  },
+  {
+    id: 'd',
+    date: undefined,
+    body: 'gonna end it all'
+  },
+  {
+    id: 'e',
+    date: new Date(),
+    body: 'tweet text here'
+  },
+  {
+    id: 'f',
+    date: new Date(),
+    body: 'omg shiv'
+  },
+  {
+    id: 'g',
+    date: new Date(),
+    body: 'whats on your mind, privacy much?'
+  },
+  {
+    id: 'h',
+    date: new Date(),
+    body: 'ugh'
+  },
+  {
+    id: 'i',
+    date: new Date(),
+    body: 'SPORTS'
+  },
+];
 
-// const { REACT_APP_ENV } = process.env;
-// const composeEnhancers = (REACT_APP_ENV === 'PRD') ? compose : composeWithDevTools;
+type ComposeType = {
+  workingTweet?: Tweet;
+  originalTweet?: Tweet;
+};
+
+const DEFAULT_COMPOSE: ComposeType = {
+  workingTweet: undefined,
+  originalTweet: undefined,
+}
 
 export const PageMain: FC = () => {
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // isLoading
 
-  const [composeTweet, setComposeTweet] = useState<Tweet>();
+  const [tweets, setTweets] = useState<Tweet[]>(TWEETS);
+  const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
 
-  // useEffect =>
-  // store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+  const editTweet = (tweet: Tweet) => {
+    setTweets(tweets.filter(t => t.id !== tweet.id));
+    setCompose({
+      workingTweet: { ...tweet },
+      originalTweet: { ...tweet },
+    });
+  }
 
-  const tweets: Tweet[] = [
-    {
-      id: 'a',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-    {
-      id: 'b',
-      date: undefined,
-      body: 'tweet draft here'
-    },
-    {
-      id: 'c',
-      date: undefined,
-      body: 'tweet draft here'
-    },
-    {
-      id: 'd',
-      date: undefined,
-      body: 'tweet draft here'
-    },
-    {
-      id: 'e',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-    {
-      id: 'f',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-    {
-      id: 'g',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-    {
-      id: 'h',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-    {
-      id: 'i',
-      date: new Date(),
-      body: 'tweet text here'
-    },
-  ];
+  const setWorkingTweet = (newTweet: Tweet) => {
+    setCompose({
+      workingTweet: { ...newTweet },
+      originalTweet: compose.originalTweet
+    })
+  }
 
   const remove = () => {
-    // TODO: re-add to the library if it has an id
-    setComposeTweet(undefined);
+    if (compose.originalTweet) {
+      setTweets([...tweets, compose.originalTweet]);
+    }
+    setCompose(DEFAULT_COMPOSE);
   }
 
   return (
     <>
-      {/* TODO: we probably will use redux here because managing an array of tweets might need it */}
-      {/* Or maybe when I do this it will just be in PageMain */}
-      {/* <Provider store={store}>  */}
       <Header />
       <Container>
         <ContainerLeft>
           <ComposeComponent
-            tweet={composeTweet}
+            tweet={compose.workingTweet}
             send={() => { console.log('send'); }}
             remove={remove}
             draft={() => { console.log('draft'); }}
             schedule={() => { console.log('schedule'); }}
-            setTweet={setComposeTweet}
+            setTweet={setWorkingTweet}
           />
         </ContainerLeft>
         <ContainerRight>
-          <LibraryComponent tweets={tweets} />
+          <LibraryComponent tweets={tweets} editTweet={editTweet} />
         </ContainerRight>
       </Container>
     </>

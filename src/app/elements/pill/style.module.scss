@@ -1,0 +1,102 @@
+@import 'app/theme.scss';
+
+.pill {
+  height: 32px;
+  background: #0001;
+  border-radius: 18px;
+  transition: background 0.2s;
+  color: $white;
+  display: flex;
+
+  &.hoverable {
+    cursor: pointer;
+
+    &:hover {
+      background: $lightPurple;
+    }
+  }
+
+  &.none {
+    background: none;
+
+    &:hover {
+      .iconHolder {
+        svg {
+          color: $purple;
+
+          path {
+            stroke: $purple;
+          }
+        }
+      }
+    }
+  }
+
+  &.purple {
+    background: $purple;
+
+    .iconHolder {
+      width: 32px;
+
+      svg {
+        color: $white;
+
+        path {
+          stroke: $white;
+        }
+      }
+    }
+  }
+
+  &.grey {
+    background: $grey;
+
+    .iconHolder {
+      width: 32px;
+
+      svg {
+        color: $white;
+
+        path {
+          stroke: $white;
+        }
+      }
+    }
+  }
+
+  &.iconColor-purple {
+    .iconHolder {
+      width: 32px;
+
+      svg {
+        color: $purple;
+
+        path {
+          stroke: $purple;
+        }
+      }
+    }
+  }
+
+  .iconHolder {
+    width: 32px;
+
+    svg {
+      color: #0006;
+      height: 18px;
+      width: 18px;
+      margin: 7px;
+
+      path {
+        stroke: #0006;
+      }
+    }
+  }
+
+  .labelHolder {
+    width: 80px;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+}

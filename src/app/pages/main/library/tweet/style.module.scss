@@ -1,6 +1,6 @@
 .tweetHolder {
   width: calc(100% - 8px);
-  height: 120px;
+  height: 128px;
   padding: 4px;
 
   .tweet {
@@ -23,23 +23,24 @@
     }
 
     .actionRow {
-      height: 40px;
+      height: 48px;
       margin: 0 20px;
       width: calc(100% - 40px);
       display: flex;
 
       .labelHolder {
-        width: 50%;
+        width: 180px;
+        padding-top: 8px;
       }
 
       .nubHolder {
         height: 100%;
-        width: 50%;
+        width: calc(100% - 180px);
         display: flex;
         justify-content: right;
 
         .nub {
-          margin: 4px 0 4px 16px;
+          margin: 8px 0 0 16px;
         }
       }
     }

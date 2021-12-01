@@ -51,30 +51,35 @@
         display: flex;
         justify-content: right;
 
+        .characterCount {
+          width: 54px;
+          padding: 24px 0;
+          text-align: center;
+          color: $twitter;
+
+          &.error {
+            color: $error;
+          }
+        }
+
         .button {
           margin: 4px;
         }
       }
-
     }
   }
 }
 
 @media only screen and (min-width: 768px) {
   .composeHolder {
-
     .buttonHolder {
-
       .actionDisplayer {
         .actionHolder {
-
           .button {
             margin: 4px;
           }
         }
-
       }
-
     }
   }
 }

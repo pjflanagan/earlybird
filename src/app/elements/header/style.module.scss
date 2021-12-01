@@ -36,6 +36,12 @@
       background: #0000;
       box-shadow: none;
       border: none;
+
+      .logoHolder {
+        .logo {
+          margin: 28px;
+        }
+      }
     }
 
     .logoHolder {
@@ -59,7 +65,7 @@
 
 @media only screen and (min-width: 1024px) {
   .header {
-    background: $white;
+    // background: $white;
 
     &.clear {
       .logoHolder {
@@ -69,11 +75,11 @@
       }
     }
 
-    .logoHolder {
-      .logo {
-        filter: none;
-      }
-    }
+    // .logoHolder {
+    //   .logo {
+    //     filter: none;
+    //   }
+    // }
 
   }
 }

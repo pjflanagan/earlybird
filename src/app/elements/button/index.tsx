@@ -13,7 +13,6 @@ type ButtonIconProps = {
   className?: string;
 }
 
-
 export const ButtonIcon: FC<ButtonIconProps> = ({
   onClick,
   icon,
@@ -50,16 +49,19 @@ export const ButtonLabel: FC<ButtonLabelProps> = ({
 type ButtonFrameProps = {
   className?: string;
   disabled?: boolean;
+  secondary?: boolean;
 }
 
 export const ButtonFrame: FC<ButtonFrameProps> = ({
   children,
   className: classNameProp,
-  disabled
+  disabled,
+  secondary
 }) => {
   const className = classNames(Style.button, {
     [Style.disabled]: disabled,
     [`${classNameProp}`]: classNameProp,
+    [Style.secondary]: secondary
   });
 
   return (
@@ -70,13 +72,12 @@ export const ButtonFrame: FC<ButtonFrameProps> = ({
 }
 
 
-type ButtonProps = {
-  icon: string;
-  onClick: () => void;
-  disabled?: boolean;
-  label?: string;
-  className?: string;
-}
+type ButtonProps =
+  ButtonFrameProps &
+  ButtonLabelProps &
+  ButtonIconProps & {
+    label?: string;
+  }
 
 export const Button: FC<ButtonProps> = ({
   onClick,
@@ -84,6 +85,7 @@ export const Button: FC<ButtonProps> = ({
   icon,
   label,
   className: classNameProp,
+  secondary
 }) => {
 
   const className = classNames(Style.button, {
@@ -95,6 +97,7 @@ export const Button: FC<ButtonProps> = ({
     <ButtonFrame
       disabled={disabled}
       className={className}
+      secondary={secondary}
     >
       <ButtonIcon icon={icon} onClick={onClick} />
       {

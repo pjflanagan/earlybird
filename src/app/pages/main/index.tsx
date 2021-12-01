@@ -71,7 +71,7 @@ export const PageMain: FC = () => {
   ];
 
   const remove = () => {
-    // TODO: re-add to the library
+    // TODO: re-add to the library if it has an id
     setComposeTweet(undefined);
   }
 

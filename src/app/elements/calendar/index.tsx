@@ -21,7 +21,6 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
   constructor(props: CalendarProps) {
     super(props);
     this.state = {
-      // selectedDay: Helpers.TODAY_TIMESTAMP,
       ...this.getToday(),
     }
   }
@@ -42,7 +41,6 @@ export class Calendar extends Component<CalendarProps, CalendarState> {
   }
 
   onDateClick = (day: Helpers.DayDetails): void => {
-    // this.setState({ selectedDay: day.timestamp }, () => Helpers.setDateToInput(day.timestamp));
     if (this.props.onChange) {
       this.props.onChange(new Date(day.timestamp));
     }

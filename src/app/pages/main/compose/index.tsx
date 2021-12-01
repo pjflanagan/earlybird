@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classNames from 'classnames';
 
 import { Button, Display } from 'app/elements';
 import { Tweet } from 'app/utils';
@@ -19,11 +20,20 @@ const canCancel = (tweet: Tweet | undefined): boolean => {
   return false;
 }
 
-const canSend = (tweet: Tweet | undefined): boolean => {
+const canDraft = (tweet: Tweet | undefined): boolean => {
   if (!tweet) {
     return false;
   } else if (tweet.body) {
     return tweet.body.length > 0;
+  }
+  return false;
+}
+
+const canSend = (tweet: Tweet | undefined): boolean => {
+  if (!tweet) {
+    return false;
+  } else if (tweet.body) {
+    return canDraft(tweet) && tweet.body.length < 280;
   }
   return false;
 }
@@ -67,6 +77,18 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
     });
   }
 
+  const renderRemainingCharacterCount = (): JSX.Element => {
+    const remainingCharacterCount = tweet?.body ? 280 - tweet.body.length : 0;
+    const className = classNames(Style.characterCount, {
+      [Style.error]: remainingCharacterCount < 0,
+    });
+    return (
+      <div className={className}>
+        {remainingCharacterCount}
+      </div>
+    )
+  }
+
   return (
     <div className={Style.composeHolder}>
       <div className={Style.inputHolder}>
@@ -85,7 +107,8 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
         </div>
         <Display size="sm" className={Style.actionDisplayer}>
           <div className={Style.actionHolder}>
-            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} />
+            {renderRemainingCharacterCount()}
+            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} secondary />
             {
               tweet?.date ?
                 <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} /> :
@@ -95,10 +118,11 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
         </Display>
         <Display size={['md', 'lg', 'xl']} className={Style.actionDisplayer}>
           <div className={Style.actionHolder}>
-            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} />
+            {renderRemainingCharacterCount()}
+            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} secondary />
+            <Button disabled={!canSend(tweet)} className={Style.button} icon="send" onClick={send} secondary />
             <Button disabled={!canSend(tweet)} className={Style.button} icon="save" onClick={draft} />
             <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} />
-            <Button disabled={!canSend(tweet)} className={Style.button} icon="send" onClick={send} />
           </div>
         </Display>
       </div>

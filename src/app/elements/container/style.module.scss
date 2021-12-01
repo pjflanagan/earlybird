@@ -33,15 +33,16 @@
 
     .containerLeft {
       height: 100%;
-      width: calc(52% - 1px);
+      max-width: 680px;
+      width: calc(58% - 1px);
       border-right: 1px solid #0002;
       background: $white;
     }
 
     .containerRight {
       height: 100%;
-      width: 48%;
-      max-width: 550px;
+      min-width: 42%;
+      width: calc(100% - 681px);
     }
   }
 }

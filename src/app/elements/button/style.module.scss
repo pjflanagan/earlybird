@@ -12,6 +12,24 @@
   overflow: hidden;
   flex-wrap: wrap;
 
+  &.secondary {
+    background: none;
+
+    &:hover {
+      background: $lightPurple;
+    }
+
+    .iconHolder {
+      svg {
+        color: $purple;
+
+        path {
+          stroke: $purple;
+        }
+      }
+    }
+  }
+
   &.labeledButton {
     width: 274px;
     overflow: hidden;
@@ -25,10 +43,10 @@
       cursor: default;
 
       svg {
-        color: #0006;
+        color: $grey1;
 
         path {
-          stroke: #0006;
+          stroke: $grey1;
         }
       }
     }

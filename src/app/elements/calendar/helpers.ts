@@ -79,22 +79,3 @@ export const getMonthDetails = (year: number, month: number): MonthDetails => {
 export const isCurrentDay = (day: DayDetails): boolean => {
   return day.timestamp === TODAY_TIMESTAMP;
 }
-
-// export const getDateFromDateString = (dateValue: string) => {
-//   const dateData = dateValue.split('-').map(d => parseInt(d, 10));
-//   if (dateData.length < 3)
-//     return null;
-
-//   const year = dateData[0];
-//   const month = dateData[1];
-//   const date = dateData[2];
-//   return { year, month, date };
-// }
-
-// export const getDateStringFromTimestamp = (timestamp: number) => {
-//   const dateObject = new Date(timestamp);
-//   const month = dateObject.getMonth() + 1;
-//   const date = dateObject.getDate();
-//   return dateObject.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (date < 10 ? '0' + date : date);
-// }
-

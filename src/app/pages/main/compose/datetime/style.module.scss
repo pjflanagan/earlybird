@@ -7,6 +7,10 @@
     width: 54px;
     background: none;
 
+    &:hover {
+      background: $lightPurple;
+    }
+
     .iconHolder {
       svg {
         color: $purple;

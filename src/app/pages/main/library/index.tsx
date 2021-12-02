@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Tweet } from 'app/utils';
 
 import { TweetComponent } from './tweet';
+import { FilterComponent, FilterOption } from './filter';
 
 import Style from './style.module.scss';
 
@@ -16,14 +17,50 @@ export const LibraryComponent: FC<LibraryComponentProps> = ({
   tweets
 }) => {
 
-  // TODO: order by date that itll send then drafts at the end
+  const [filterBy, setFilterBy] = useState<FilterOption>(FilterOption.ALL);
+
+  const renderEmptyLibrary = (): JSX.Element => {
+    // TODO: if empty and loaded, show empty, if loading show this
+    // TODO: move this to scss
+    return (
+      <div style={{
+        textAlign: 'center',
+        width: '100%',
+        color: '#0004',
+        padding: '20px'
+      }}>
+        Loading tweets...
+      </div>
+    )
+  };
+
+  const drafts = tweets.filter(t => !t.date);
+  const scheduled = tweets.filter(t => !!t.date).sort((a, b) => {
+    return (a.date?.getTime() || 0) - (b.date?.getTime() || 0);
+  });
+
+  const displayTweets = (() => {
+    switch (filterBy) {
+      case FilterOption.SCHEDULED:
+        return [...scheduled];
+      case FilterOption.DRAFTS:
+        return [...drafts];
+      case FilterOption.ALL:
+      default:
+        return [...scheduled, ...drafts];
+    }
+  })();
 
   return (
     <div className={Style.libraryContainer}>
+      <FilterComponent filterBy={filterBy} setFilterBy={setFilterBy} />
       {
-        tweets.map((tweet) => (
-          <TweetComponent key={tweet.id} tweet={tweet} editTweet={editTweet} />
-        ))
+        displayTweets.length === 0
+          ? renderEmptyLibrary()
+          : displayTweets.map((tweet) => (
+            // TODO: there should occasionally be year bars in here and a bar that separates drafts
+            <TweetComponent key={tweet.id} tweet={tweet} editTweet={editTweet} />
+          ))
       }
     </div>
   )

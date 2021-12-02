@@ -5,8 +5,6 @@ import { getIcon } from '../icon';
 
 import Style from './style.module.scss';
 
-// TODO: simplify this, move a lot of the logic to a specific calendar input
-
 type ButtonIconProps = {
   icon: string;
   onClick: () => void;
@@ -92,7 +90,6 @@ export const Button: FC<ButtonProps> = ({
 
   const className = classNames(Style.button, {
     [`${classNameProp}`]: classNameProp,
-    [Style.labeledButton]: label,
   });
 
   return (

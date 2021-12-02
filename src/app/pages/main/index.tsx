@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
-// import { useAuth0 } from "@auth0/auth0-react";
+import React, { FC, useEffect, useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
-import { Tweet } from 'app/utils';
+import { Tweet } from 'app/utils'; // API
 
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
@@ -10,7 +10,7 @@ import { ComposeComponent } from './compose';
 const TWEETS: Tweet[] = [
   {
     id: 'a',
-    date: new Date(),
+    date: new Date('Jan 5, 2022'),
     body: 'its funny how lol am i right'
   },
   {
@@ -30,27 +30,27 @@ const TWEETS: Tweet[] = [
   },
   {
     id: 'e',
-    date: new Date(),
+    date: new Date('Jan 6, 2022'),
     body: 'tweet text here'
   },
   {
     id: 'f',
-    date: new Date(),
+    date: new Date('Feb 5, 2022'),
     body: 'omg shiv'
   },
   {
     id: 'g',
-    date: new Date(),
+    date: new Date('Mar 25, 2022'),
     body: 'whats on your mind, privacy much?'
   },
   {
     id: 'h',
-    date: new Date(),
+    date: new Date('Aug 11, 2022'),
     body: 'ugh'
   },
   {
     id: 'i',
-    date: new Date(),
+    date: new Date('Oct 23, 2022'),
     body: 'SPORTS'
   },
 ];
@@ -65,11 +65,26 @@ const DEFAULT_COMPOSE: ComposeType = {
   originalTweet: undefined,
 }
 
-export const PageMain: FC = () => {
-  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // isLoading
+// const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
+// const api = new API(AUTH_0_DOMAIN);
 
-  const [tweets, setTweets] = useState<Tweet[]>(TWEETS);
+export const PageMain: FC = () => {
+  const { user, isAuthenticated } = useAuth0(); // getAccessTokenSilently
+
+  const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
+
+  useEffect(() => {
+    console.log({ user, isAuthenticated });
+    if (isAuthenticated) {
+      //   api.getAccessToken(AUTH_0_DOMAIN, getAccessTokenSilently);
+      setTweets(TWEETS);
+    }
+    // else {
+    //   console.error('Unable to authenticate');
+    //   window.location.replace('/login');
+    // }
+  }, [user]);
 
   const editTweet = (tweet: Tweet) => {
     setTweets(tweets.filter(t => t.id !== tweet.id));
@@ -95,7 +110,12 @@ export const PageMain: FC = () => {
 
   return (
     <>
-      <Header />
+      {/* TODO: splash loader */}
+      <Header>
+        <div>
+          {/* TODO: user image with dropdown for logout */}
+        </div>
+      </Header>
       <Container>
         <ContainerLeft>
           <ComposeComponent

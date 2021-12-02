@@ -10,6 +10,16 @@ type TweetComponentProps = {
   tweet: Tweet;
 }
 
+const formatDate = (date: Date): string | undefined => {
+  return date.toLocaleString('en-US', {
+    day: 'numeric',
+    // year: 'numeric',
+    month: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+}
+
 export const TweetComponent: FC<TweetComponentProps> = ({
   tweet,
   editTweet
@@ -25,7 +35,12 @@ export const TweetComponent: FC<TweetComponentProps> = ({
         </div>
         <div className={Style.actionRow}>
           <div className={Style.labelHolder}>
-            <Pill label="Draft" background="purple" icon="clock" />
+            {
+              tweet.date
+                ? <Pill label={formatDate(tweet.date)} background="purple" icon="clock" />
+                : <Pill label="Draft" background="grey" icon="save" />
+            }
+
           </div>
           <div className={Style.nubHolder}>
             <Pill background="none" className={Style.nub} icon="trash" onClick={() => { console.log() }} />

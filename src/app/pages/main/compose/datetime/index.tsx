@@ -13,8 +13,8 @@ type DateTimeToggleComponent = {
   setDate: (newDate: Date | undefined) => void;
 }
 
-// TODO: this is two parts
-// it's a button that appears to expand into a datetime holder
+// this could be two parts
+// a button that appears to expand into a datetime holder (but really is a separate absolute element)
 // which on hover appears to expand into an absolute positioned calendar picker
 
 // const formatDate = (date: Date | undefined): string | undefined => {

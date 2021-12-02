@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react"
 
 const Page404: FC = () => {
   useEffect(() => {
-    window.location.replace('/login');
+    window.location.replace('/');
   });
   return null;
 };

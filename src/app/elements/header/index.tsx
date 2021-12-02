@@ -6,7 +6,7 @@ import LogoSm from './header-sm.png';
 import Style from './style.module.scss';
 
 type HeaderProps = {
-  children?: JSX.Element;
+  children?: JSX.Element | JSX.Element[];
   clear?: boolean;
 }
 
@@ -35,8 +35,26 @@ export const Header: FC<HeaderProps> = ({
   );
 }
 
-export const HeaderItem: FC = () => {
+type HeaderIconProps = {
+  src: string;
+}
+
+export const HeaderIcon: FC<HeaderIconProps> = ({
+  src,
+}) => {
   return (
-    <div />
+    <img className={Style.headerIcon} src={src} alt="Profile Photo" />
+  );
+}
+
+type HeaderLinkProps = {
+  onClick: () => void;
+}
+
+export const HeaderLink: FC<HeaderLinkProps> = ({
+  onClick
+}) => {
+  return (
+    <div onClick={onClick}></div>
   );
 }

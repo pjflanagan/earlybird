@@ -7,3 +7,4 @@ export * from './icon';
 export * from './display';
 export * from './pill';
 export * from './background';
+export * from './splash';

@@ -24,6 +24,12 @@
 
   .headerItemsHolder {
     width: 50%;
+    display: flex;
+    justify-content: right;
+
+    .headerIcon {
+      height: 100%;
+    }
   }
 }
 

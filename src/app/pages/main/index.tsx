@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
+import { Header, HeaderIcon, Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
 import { Tweet } from 'app/utils'; // API
 
 import { LibraryComponent } from './library';
@@ -69,7 +69,7 @@ const DEFAULT_COMPOSE: ComposeType = {
 // const api = new API(AUTH_0_DOMAIN);
 
 export const PageMain: FC = () => {
-  const { user, isAuthenticated } = useAuth0(); // getAccessTokenSilently
+  const { user, isAuthenticated, isLoading } = useAuth0(); // getAccessTokenSilently
 
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
@@ -110,11 +110,11 @@ export const PageMain: FC = () => {
 
   return (
     <>
-      {/* TODO: splash loader */}
+      <Splash isOpen={isLoading} />
       <Header>
-        <div>
-          {/* TODO: user image with dropdown for logout */}
-        </div>
+        {
+          user && user.picture && <HeaderIcon src={user.picture} /> || <></>
+        }
       </Header>
       <Container>
         <ContainerLeft>

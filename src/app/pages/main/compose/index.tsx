@@ -2,53 +2,17 @@ import React, { FC } from 'react';
 import classNames from 'classnames';
 
 import { Button, Display } from 'app/elements';
-import { Tweet } from 'app/utils';
+import { Tweet, MAX_TWEET_LENGTH, validate, ValidateAction } from 'app/utils';
 
 import { DateTimeToggleComponent } from './datetime';
 import Style from './style.module.scss';
 
-const COMPOSE_PLACEHOLDER_TEXT = `What's on your mind?`;
-
-const canCancel = (tweet: Tweet | undefined): boolean => {
-  if (!tweet) {
-    return false;
-  } else if (tweet.id) {
-    return true;
-  } else if (tweet.body) {
-    return tweet.body.length > 0;
-  }
-  return false;
-}
-
-const canDraft = (tweet: Tweet | undefined): boolean => {
-  if (!tweet) {
-    return false;
-  } else if (tweet.body) {
-    return tweet.body.length > 0;
-  }
-  return false;
-}
-
-const canSend = (tweet: Tweet | undefined): boolean => {
-  if (!tweet) {
-    return false;
-  } else if (tweet.body) {
-    return canDraft(tweet) && tweet.body.length < 280;
-  }
-  return false;
-}
-
-const canSchedule = (tweet: Tweet | undefined): boolean => {
-  if (!tweet) {
-    return false;
-  }
-  return canSend(tweet) && !!tweet.date;
-}
+const COMPOSE_PLACEHOLDER_TEXT = `What's gonna be on your mind?`;
 
 type ComposeComponentProps = {
   tweet?: Tweet;
   send: () => void;
-  remove: () => void;
+  cancel: () => void;
   draft: () => void;
   schedule: () => void;
   setTweet: (newTweet: Tweet) => void;
@@ -57,7 +21,7 @@ type ComposeComponentProps = {
 export const ComposeComponent: FC<ComposeComponentProps> = ({
   tweet,
   send,
-  remove,
+  cancel,
   draft,
   schedule,
   setTweet,
@@ -78,7 +42,7 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
   }
 
   const renderRemainingCharacterCount = (): JSX.Element => {
-    const remainingCharacterCount = tweet?.body ? 280 - tweet.body.length : 0;
+    const remainingCharacterCount = tweet?.body ? MAX_TWEET_LENGTH - tweet.body.length : MAX_TWEET_LENGTH;
     const className = classNames(Style.characterCount, {
       [Style.error]: remainingCharacterCount < 0,
     });
@@ -108,21 +72,21 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
         <Display size="sm" className={Style.actionDisplayer}>
           <div className={Style.actionHolder}>
             {renderRemainingCharacterCount()}
-            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} secondary />
+            <Button disabled={!validate(tweet, ValidateAction.CANCEL)} className={Style.button} icon="trash" onClick={cancel} secondary />
             {
               tweet?.date ?
-                <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} /> :
-                <Button disabled={!canSend(tweet)} className={Style.button} icon="save" onClick={draft} />
+                <Button disabled={!validate(tweet, ValidateAction.SCHEDULE)} className={Style.button} icon="clock" onClick={schedule} /> :
+                <Button disabled={!validate(tweet, ValidateAction.DRAFT)} className={Style.button} icon="save" onClick={draft} />
             }
           </div>
         </Display>
         <Display size={['md', 'lg', 'xl']} className={Style.actionDisplayer}>
           <div className={Style.actionHolder}>
             {renderRemainingCharacterCount()}
-            <Button disabled={!canCancel(tweet)} className={Style.button} icon="trash" onClick={remove} secondary />
-            <Button disabled={!canSend(tweet)} className={Style.button} icon="send" onClick={send} secondary />
-            <Button disabled={!canSend(tweet)} className={Style.button} icon="save" onClick={draft} />
-            <Button disabled={!canSchedule(tweet)} className={Style.button} icon="clock" onClick={schedule} />
+            <Button disabled={!validate(tweet, ValidateAction.CANCEL)} className={Style.button} icon="trash" onClick={cancel} secondary />
+            <Button disabled={!validate(tweet, ValidateAction.SEND)} className={Style.button} icon="send" onClick={send} secondary />
+            <Button disabled={!validate(tweet, ValidateAction.DRAFT)} className={Style.button} icon="save" onClick={draft} />
+            <Button disabled={!validate(tweet, ValidateAction.SCHEDULE)} className={Style.button} icon="clock" onClick={schedule} />
           </div>
         </Display>
       </div>

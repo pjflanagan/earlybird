@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { FC, useState } from 'react';
+// import { useAuth0 } from "@auth0/auth0-react";
 
 import { Header, Container, ContainerLeft, ContainerRight } from 'app/elements';
 import { Tweet } from 'app/utils';
@@ -66,7 +66,7 @@ const DEFAULT_COMPOSE: ComposeType = {
 }
 
 export const PageMain: FC = () => {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // isLoading
+  // const { user, isAuthenticated, getAccessTokenSilently } = useAuth0(); // isLoading
 
   const [tweets, setTweets] = useState<Tweet[]>(TWEETS);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
@@ -86,7 +86,7 @@ export const PageMain: FC = () => {
     })
   }
 
-  const remove = () => {
+  const cancel = () => {
     if (compose.originalTweet) {
       setTweets([...tweets, compose.originalTweet]);
     }
@@ -101,7 +101,7 @@ export const PageMain: FC = () => {
           <ComposeComponent
             tweet={compose.workingTweet}
             send={() => { console.log('send'); }}
-            remove={remove}
+            cancel={cancel}
             draft={() => { console.log('draft'); }}
             schedule={() => { console.log('schedule'); }}
             setTweet={setWorkingTweet}

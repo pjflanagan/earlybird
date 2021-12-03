@@ -1,0 +1,19 @@
+
+MVP
+- [ ] API calls
+  - [ ] Load
+  - [ ] create
+  - [ ] edit tweets
+- [x] Calendar  <input type="datetime-local"> with default browser picker
+- [ ] Images 
+    - [ ] Favicon 
+    - [ ] icon for all device sizes
+    - [ ] Social share cards
+- [ ] An advertisement
+
+MVP 2
+- [ ] Service worker and offline mode
+- [ ] custom calendar and date
+    - [ ] no show year arrows
+    - [ ] Don’t go back further than today
+    - [ ] Disable all past

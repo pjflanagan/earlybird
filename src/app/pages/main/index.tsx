@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Header, HeaderIcon, Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
-import { Tweet } from 'app/utils'; // API
+import { Tweet, API } from 'app/utils';
 
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
@@ -65,11 +65,11 @@ const DEFAULT_COMPOSE: ComposeType = {
   originalTweet: undefined,
 }
 
-// const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
-// const api = new API(AUTH_0_DOMAIN);
+const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
+const api = new API(AUTH_0_DOMAIN);
 
 export const PageMain: FC = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0(); // getAccessTokenSilently
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
@@ -77,7 +77,7 @@ export const PageMain: FC = () => {
   useEffect(() => {
     console.log({ user, isAuthenticated });
     if (isAuthenticated) {
-      //   api.getAccessToken(AUTH_0_DOMAIN, getAccessTokenSilently);
+      api.getAccessToken(getAccessTokenSilently);
       setTweets(TWEETS);
     }
     // else {

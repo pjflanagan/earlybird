@@ -61,13 +61,21 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
           placeholder={COMPOSE_PLACEHOLDER_TEXT}
           onChange={setBody}
         />
-      </div>
-      <div className={Style.buttonHolder}>
-        <div className={Style.dateTimeInputHolder}>
+        <Display size={['sm', 'md']} className={Style.calendarHolder}>
           <DateTimeToggleComponent
             date={tweet?.date}
             setDate={setDate}
           />
+        </Display>
+      </div>
+      <div className={Style.buttonHolder}>
+        <div className={Style.dateTimeInputHolder}>
+          <Display size={['lg', 'xl']}>
+            <DateTimeToggleComponent
+              date={tweet?.date}
+              setDate={setDate}
+            />
+          </Display>
         </div>
         <Display size="sm" className={Style.actionDisplayer}>
           <div className={Style.actionHolder}>

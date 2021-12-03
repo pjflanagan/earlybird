@@ -6,7 +6,7 @@ type Size = 'sm' | 'md' | 'lg' | 'xl';
 
 type DisplayProps = {
   size: Size | Size[];
-  className: string;
+  className?: string;
 }
 
 export const Display: FC<DisplayProps> = ({

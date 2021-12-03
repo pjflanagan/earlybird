@@ -13,9 +13,14 @@
     border: 1px solid #0002;
     border-radius: 6px;
 
+    .dateHolderSmall {
+      width: 100%;
+      padding: 6px;
+    }
+
     .bodyHolder {
-      margin: 0 20px;
-      width: calc(100% - 40px);
+      margin: 0 6px;
+      width: calc(100% - 12px);
       height: 80px;
 
       .body {

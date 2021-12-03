@@ -1,17 +1,29 @@
 .sm {
-  display: inline;
+  display: block;
 }
 
 .md {
   display: none;
+
+  &.sm {
+    display: block;
+  }
 }
 
 .lg {
   display: none;
+
+  &.sm {
+    display: block;
+  }
 }
 
 .xl {
   display: none;
+
+  &.sm {
+    display: block;
+  }
 }
 
 @media only screen and (min-width: 580px) {
@@ -20,7 +32,7 @@
   }
 
   .md {
-    display: inline;
+    display: block;
   }
 }
 
@@ -28,19 +40,27 @@
 @media only screen and (min-width: 768px) {
   .md {
     display: none;
+
+    &.sm {
+      display: none;
+    }
   }
 
   .lg {
-    display: inline;
+    display: block;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .lg {
     display: none;
+
+    .xl {
+      display: block;
+    }
   }
 
   .xl {
-    display: inline;
+    display: block;
   }
 }

@@ -1,13 +1,14 @@
 @import 'app/theme.scss';
 
 .filterHolder {
-  display: flex;
   width: 100%;
-  margin: 20px auto;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
 
   .filterOption {
     cursor: pointer;
-    width: 120px;
+    width: 106px;
     font-weight: bold;
 
     .pill {

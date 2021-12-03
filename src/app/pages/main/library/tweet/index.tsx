@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Pill } from 'app/elements';
+import { Pill, Display } from 'app/elements';
 import { Tweet } from 'app/utils';
 
 import Style from './style.module.scss';
@@ -28,6 +28,13 @@ export const TweetComponent: FC<TweetComponentProps> = ({
   return (
     <div className={Style.tweetHolder}>
       <div className={Style.tweet}>
+        <Display size="sm" className={Style.dateHolderSmall}>
+          {
+            tweet.date
+              ? <Pill label={formatDate(tweet.date)} background="purple" icon="clock" />
+              : <Pill label="Draft" background="grey" icon="save" />
+          }
+        </Display>
         <div className={Style.bodyHolder}>
           <div className={Style.body}>
             {tweet.body}
@@ -35,12 +42,13 @@ export const TweetComponent: FC<TweetComponentProps> = ({
         </div>
         <div className={Style.actionRow}>
           <div className={Style.labelHolder}>
-            {
-              tweet.date
-                ? <Pill label={formatDate(tweet.date)} background="purple" icon="clock" />
-                : <Pill label="Draft" background="grey" icon="save" />
-            }
-
+            <Display size={['md', 'lg', 'xl']}>
+              {
+                tweet.date
+                  ? <Pill label={formatDate(tweet.date)} background="purple" icon="clock" />
+                  : <Pill label="Draft" background="grey" icon="save" />
+              }
+            </Display>
           </div>
           <div className={Style.nubHolder}>
             <Pill background="none" className={Style.nub} icon="trash" onClick={() => { console.log() }} />

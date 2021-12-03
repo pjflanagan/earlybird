@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Header, HeaderIcon, Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
-import { Tweet, API } from 'app/utils';
+import { Tweet } from 'app/utils'; // API
 
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
@@ -65,11 +65,11 @@ const DEFAULT_COMPOSE: ComposeType = {
   originalTweet: undefined,
 }
 
-const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
-const api = new API(AUTH_0_DOMAIN);
+// const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
+// const api = new API(AUTH_0_DOMAIN);
 
 export const PageMain: FC = () => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0(); // getAccessTokenSilently
 
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
@@ -77,7 +77,7 @@ export const PageMain: FC = () => {
   useEffect(() => {
     console.log({ user, isAuthenticated });
     if (isAuthenticated) {
-      api.getAccessToken(getAccessTokenSilently);
+      // api.getAccessToken(getAccessTokenSilently);
       setTweets(TWEETS);
     }
     // else {
@@ -86,7 +86,9 @@ export const PageMain: FC = () => {
     // }
   }, [user]);
 
-  const editTweet = (tweet: Tweet) => {
+  // Edit
+
+  const setComposeTweet = (tweet: Tweet) => {
     setTweets(tweets.filter(t => t.id !== tweet.id));
     setCompose({
       workingTweet: { ...tweet },
@@ -101,11 +103,56 @@ export const PageMain: FC = () => {
     })
   }
 
-  const cancel = () => {
-    if (compose.originalTweet) {
-      setTweets([...tweets, compose.originalTweet]);
-    }
+  const clearCompose = () => {
     setCompose(DEFAULT_COMPOSE);
+  }
+
+  const cancelCompose = () => {
+    if (compose.originalTweet) {
+      addTweetToLibrary(compose.originalTweet);
+    }
+    clearCompose();
+  }
+
+  // Library
+
+  const removeTweetFromLibrary = (tweet: Tweet) => {
+    setTweets(tweets.filter(t => t.id !== tweet.id));
+  }
+
+  const addTweetToLibrary = (tweet: Tweet) => {
+    setTweets([...tweets, tweet]);
+  }
+
+  // Backend
+
+  const deleteTweet = (tweet: Tweet) => {
+    // TODO: fetch backend
+    removeTweetFromLibrary(tweet);
+  }
+
+  const sendTweet = (tweet: Tweet, callback: (tweet: Tweet) => void) => {
+    // TODO: fetch backend and callback on success
+    callback(tweet);
+  }
+
+  const draftTweet = () => {
+    const tweet = compose.workingTweet;
+    // TODO: fetch backend
+    if (tweet) {
+      tweet.date = undefined;
+      addTweetToLibrary(tweet);
+      clearCompose();
+    }
+  }
+
+  const scheduleTweet = () => {
+    const tweet = compose.workingTweet;
+    // TODO: fetch backend
+    if (tweet) {
+      addTweetToLibrary(tweet);
+      clearCompose();
+    }
   }
 
   return (
@@ -120,15 +167,26 @@ export const PageMain: FC = () => {
         <ContainerLeft>
           <ComposeComponent
             tweet={compose.workingTweet}
-            send={() => { console.log('send'); }}
-            cancel={cancel}
-            draft={() => { console.log('draft'); }}
-            schedule={() => { console.log('schedule'); }}
+            send={() => {
+              if (compose.workingTweet) {
+                sendTweet(compose.workingTweet, clearCompose);
+              }
+            }}
+            cancel={cancelCompose}
+            draft={draftTweet}
+            schedule={scheduleTweet}
             setTweet={setWorkingTweet}
           />
         </ContainerLeft>
         <ContainerRight>
-          <LibraryComponent tweets={tweets} editTweet={editTweet} />
+          <LibraryComponent
+            tweets={tweets}
+            editTweet={setComposeTweet}
+            sendTweet={(tweet: Tweet) => {
+              sendTweet(tweet, removeTweetFromLibrary);
+            }}
+            deleteTweet={deleteTweet}
+          />
         </ContainerRight>
       </Container>
     </>

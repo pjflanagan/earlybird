@@ -9,12 +9,16 @@ import Style from './style.module.scss';
 
 type LibraryComponentProps = {
   editTweet: (tweet: Tweet) => void;
+  sendTweet: (tweet: Tweet) => void;
+  deleteTweet: (tweet: Tweet) => void;
   tweets: Tweet[];
 }
 
 export const LibraryComponent: FC<LibraryComponentProps> = ({
   editTweet,
-  tweets
+  sendTweet,
+  deleteTweet,
+  tweets,
 }) => {
 
   const [filterBy, setFilterBy] = useState<FilterOption>(FilterOption.ALL);
@@ -59,7 +63,13 @@ export const LibraryComponent: FC<LibraryComponentProps> = ({
           ? renderEmptyLibrary()
           : displayTweets.map((tweet) => (
             // TODO: there should occasionally be year bars in here and a bar that separates drafts
-            <TweetComponent key={tweet.id} tweet={tweet} editTweet={editTweet} />
+            <TweetComponent
+              key={tweet.id}
+              tweet={tweet}
+              edit={editTweet}
+              send={sendTweet}
+              remove={deleteTweet}
+            />
           ))
       }
     </div>

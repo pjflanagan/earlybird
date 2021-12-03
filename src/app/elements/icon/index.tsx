@@ -10,6 +10,9 @@ import {
   GrSend,
   GrTwitter
 } from 'react-icons/gr';
+import {
+  GiCancel
+} from 'react-icons/gi';
 
 export const getIcon = (iconName: string): JSX.Element => {
   return {
@@ -19,6 +22,7 @@ export const getIcon = (iconName: string): JSX.Element => {
     calendar: <BiCalendar />,
     send: <GrSend />,
     twitter: <GrTwitter />,
-    pencil: <BiPencil />
+    pencil: <BiPencil />,
+    cancel: <GiCancel />
   }[iconName] || <GrTwitter />;
 }

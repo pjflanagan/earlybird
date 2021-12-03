@@ -6,7 +6,9 @@ import { Tweet } from 'app/utils';
 import Style from './style.module.scss';
 
 type TweetComponentProps = {
-  editTweet: (tweet: Tweet) => void;
+  edit: (tweet: Tweet) => void;
+  send: (tweet: Tweet) => void;
+  remove: (tweet: Tweet) => void;
   tweet: Tweet;
 }
 
@@ -22,7 +24,9 @@ const formatDate = (date: Date): string | undefined => {
 
 export const TweetComponent: FC<TweetComponentProps> = ({
   tweet,
-  editTweet
+  edit,
+  send,
+  remove,
 }) => {
 
   return (
@@ -51,9 +55,9 @@ export const TweetComponent: FC<TweetComponentProps> = ({
             </Display>
           </div>
           <div className={Style.nubHolder}>
-            <Pill background="none" className={Style.nub} icon="trash" onClick={() => { console.log() }} />
-            <Pill background="none" className={Style.nub} icon="pencil" onClick={() => editTweet(tweet)} />
-            <Pill background="none" iconColor="purple" className={Style.nub} icon="send" onClick={() => { console.log() }} />
+            <Pill background="none" className={Style.nub} icon="trash" onClick={() => remove(tweet)} />
+            <Pill background="none" className={Style.nub} icon="pencil" onClick={() => edit(tweet)} />
+            <Pill background="none" iconColor="purple" className={Style.nub} icon="send" onClick={() => send(tweet)} />
           </div>
         </div>
       </div>

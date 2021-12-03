@@ -34,14 +34,14 @@
     .containerLeft {
       height: 100%;
       max-width: 680px;
-      width: calc(58% - 1px);
+      width: calc(62% - 1px);
       border-right: 1px solid #0002;
       background: $white;
     }
 
     .containerRight {
       height: 100%;
-      min-width: 42%;
+      min-width: 38%;
       width: calc(100% - 681px);
     }
   }

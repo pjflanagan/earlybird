@@ -7,14 +7,19 @@
 
   .filterOption {
     cursor: pointer;
-    width: 100px;
-    text-align: center;
+    width: 120px;
     font-weight: bold;
-    color: $grey1;
 
-    &.selected {
-      cursor: default;
+    .pill {
+      margin: 0 auto;
+      text-align: center;
+      padding-left: 12px;
+      padding-right: 0px;
       color: $purple;
+
+      &.selected {
+        color: $white;
+      }
     }
   }
 }

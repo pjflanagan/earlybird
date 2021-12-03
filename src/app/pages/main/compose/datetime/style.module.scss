@@ -1,7 +1,7 @@
 @import 'app/theme.scss';
 
 .calendarButton {
-  width: 274px;
+  width: 312px;
 
   &.inactive {
     width: 54px;
@@ -39,7 +39,17 @@
 
   .labelHolder {
     font-size: 16px;
-    padding: 19px 0 0 8px;
-    width: 212px;
+    padding: 15px 0 0 8px;
+
+    input {
+      outline: none;
+      border: none;
+      background: none;
+      color: #fff;
+
+      &::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+      }
+    }
   }
 }

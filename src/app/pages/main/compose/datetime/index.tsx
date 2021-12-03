@@ -8,15 +8,6 @@ import Style from './style.module.scss';
 const TODAY = new Date();
 const DEFAULT_DATE = new Date(TODAY.getTime() + 86400 * 1000);
 
-type DateTimeToggleComponent = {
-  date?: Date;
-  setDate: (newDate: Date | undefined) => void;
-}
-
-// this could be two parts
-// a button that appears to expand into a datetime holder (but really is a separate absolute element)
-// which on hover appears to expand into an absolute positioned calendar picker
-
 // const formatDate = (date: Date | undefined): string | undefined => {
 //   return date?.toLocaleString('en-US', {
 //     day: 'numeric',
@@ -26,6 +17,16 @@ type DateTimeToggleComponent = {
 //     minute: 'numeric',
 //   });
 // }
+
+// this could be two parts
+// a button that appears to expand into a datetime holder (but really is a separate absolute element)
+// which on hover appears to expand into an absolute positioned calendar picker
+
+type DateTimeToggleComponent = {
+  date?: Date;
+  setDate: (newDate: Date | undefined) => void;
+}
+
 
 export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
   date,
@@ -47,7 +48,7 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
     >
       <ButtonIcon className={Style.iconHolder} icon="calendar" onClick={toggleDate} />
       <ButtonLabel className={Style.labelHolder}>
-        <input type="datetime-local" value={date?.toDateString()} />
+        <input type="datetime-local" value={date?.toString() || DEFAULT_DATE.toString()} />
         {/* {formatDate(date)} */}
       </ButtonLabel>
       {/* <div className={Style.calendarHolder}>

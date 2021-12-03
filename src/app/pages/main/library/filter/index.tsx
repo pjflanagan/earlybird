@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
 
+import { Pill } from 'app/elements';
+
 import Style from './style.module.scss';
 
 export enum FilterOption {
@@ -20,16 +22,20 @@ export const FilterComponent: FC<FilterComponentProps> = ({
 }) => {
 
   const renderFilterOption = (filterOption: FilterOption) => {
-    const className = classNames(Style.filterOption, {
-      [Style.selected]: filterBy === filterOption,
+    const selected = filterBy === filterOption;
+    const className = classNames(Style.pill, {
+      [Style.selected]: selected,
     });
+    const onClick = !selected ? () => setFilterBy(filterOption) : undefined;
 
     return (
-      <div
-        className={className}
-        onClick={() => setFilterBy(filterOption)}
-      >
-        {filterOption}
+      <div className={Style.filterOption}>
+        <Pill
+          background={selected ? 'purple' : 'none'}
+          label={filterOption}
+          onClick={onClick}
+          className={className}
+        />
       </div>
     )
   }

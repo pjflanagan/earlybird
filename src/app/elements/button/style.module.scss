@@ -9,9 +9,7 @@
   transition: background 0.2s, width 0.2s, max-height 0.2s;
   user-select: none;
   overflow: hidden;
-  flex-wrap: wrap;
   width: fit-content;
-
 
   &.secondary {
     background: none;

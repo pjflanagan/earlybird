@@ -11,24 +11,11 @@ const padNumber = (n: number) => `${n}`.padStart(2, '0');
 const formatDate = (date: Date): string => {
   const yyyy = date.getFullYear();
   const MM = padNumber(date.getMonth() + 1);
-  const dd = padNumber(date.getDay());
+  const dd = padNumber(date.getDate());
   const hh = padNumber(date.getHours());
   const mm = padNumber(date.getMinutes());
   return `${yyyy}-${MM}-${dd}T${hh}:${mm}`;
 }
-
-// const getReadableDate = (date: Date | undefined): string => {
-//   if (!date) {
-//     return '';
-//   }
-//   return date.toLocaleString('en-US', {
-//     day: 'numeric',
-//     year: 'numeric',
-//     month: 'short',
-//     hour: 'numeric',
-//     minute: 'numeric',
-//   });
-// }
 
 // this could be two parts
 // a button that appears to expand into a datetime holder (but really is a separate absolute element)
@@ -38,7 +25,6 @@ type DateTimeToggleComponent = {
   date?: Date;
   setDate: (newDate: Date | undefined) => void;
 }
-
 
 export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
   date,
@@ -53,7 +39,6 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setDate(new Date(e.target.value));
   }
 
@@ -73,7 +58,6 @@ export const DateTimeToggleComponent: FC<DateTimeToggleComponent> = ({
           onChange={handleChange}
           min={formatDate(new Date())}
         />
-        {/* {} */}
       </ButtonLabel>
       {/* <div className={Style.calendarHolder}>
         <Calendar

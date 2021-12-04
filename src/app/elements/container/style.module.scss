@@ -2,9 +2,6 @@
 
 .container {
   margin-top: 36px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   position: absolute;
   width: 100%;
   min-height: calc(100% - 64px);
@@ -12,6 +9,7 @@
   .containerLeft {
     width: 100%;
     background: #fff;
+    height: fit-content;
   }
 
   .containerRight {
@@ -30,6 +28,7 @@
     margin-top: 64px;
     height: calc(100% - 64px);
     position: fixed;
+    display: flex;
 
     .containerLeft {
       height: 100%;

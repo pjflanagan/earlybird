@@ -71,7 +71,6 @@
     background: $grey;
 
     .iconHolder {
-
       svg {
         color: $white;
 
@@ -79,6 +78,10 @@
           stroke: $white;
         }
       }
+    }
+
+    &:hover {
+      background: $grey;
     }
   }
 

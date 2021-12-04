@@ -23,6 +23,7 @@ export const HeaderComponent: FC = () => {
             onClick={doubleClick}
             background="none"
             iconColor="white"
+            label={clickCount === 0 ? undefined : 'Logout'}
           />
         </Display>
         <Display size={['lg', 'xl']}>

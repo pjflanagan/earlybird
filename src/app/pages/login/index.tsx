@@ -6,7 +6,15 @@ import { Header, Container, Button, Background } from 'app/elements';
 import Style from './style.module.scss';
 
 export const PageLogin: FC = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const login = () => {
+    if (isAuthenticated) {
+      window.location.replace('/');
+    } else {
+      loginWithRedirect();
+    }
+  }
 
   return (
     <>
@@ -21,7 +29,7 @@ export const PageLogin: FC = () => {
           </div>
           <Button
             className={Style.button}
-            onClick={() => loginWithRedirect()}
+            onClick={login}
             icon="twitter"
             label="Log in with Twitter"
           />

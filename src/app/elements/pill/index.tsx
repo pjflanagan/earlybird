@@ -10,8 +10,9 @@ type PillProps = {
   onClick?: () => void;
   className?: string;
   label?: string;
-  background?: 'purple' | 'grey' | 'none';
-  iconColor?: 'purple';
+  background?: 'purple' | 'grey' | 'none' | 'white';
+  iconColor?: 'purple' | 'white';
+  hoverRevealLabel?: boolean;
 }
 
 export const Pill: FC<PillProps> = ({
@@ -20,18 +21,23 @@ export const Pill: FC<PillProps> = ({
   className: classNameProp,
   label,
   background,
-  iconColor
+  iconColor,
+  hoverRevealLabel
 }) => {
 
   const className = classNames(Style.pill, {
     [`${classNameProp}`]: classNameProp,
     [Style[`${background}`]]: background,
     [Style.hoverable]: onClick,
-    [Style[`iconColor-${iconColor}`]]: iconColor
+    [Style[`iconColor-${iconColor}`]]: iconColor,
+    [Style.hoverRevealLabel]: hoverRevealLabel,
   });
 
   return (
-    <div className={className} onClick={onClick}>
+    <div
+      className={className}
+      onClick={onClick}
+    >
       {
         icon && <div className={Style.iconHolder}>{getIcon(icon)}</div>
       }

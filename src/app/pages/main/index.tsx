@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { Header, HeaderIcon, Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
+import { Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
 import { Tweet } from 'app/utils'; // API
 
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
+import { HeaderComponent } from './header';
 
 const TWEETS: Tweet[] = [
   {
@@ -140,6 +141,7 @@ export const PageMain: FC = () => {
     const tweet = compose.workingTweet;
     // TODO: fetch backend
     if (tweet) {
+      // TODO: add the id to the tweet
       tweet.date = undefined;
       addTweetToLibrary(tweet);
       clearCompose();
@@ -150,6 +152,7 @@ export const PageMain: FC = () => {
     const tweet = compose.workingTweet;
     // TODO: fetch backend
     if (tweet) {
+      // TODO: add the id to the tweet
       addTweetToLibrary(tweet);
       clearCompose();
     }
@@ -158,11 +161,7 @@ export const PageMain: FC = () => {
   return (
     <>
       <Splash isOpen={isLoading} />
-      <Header>
-        {
-          user && user.picture && <HeaderIcon src={user.picture} /> || <></>
-        }
-      </Header>
+      <HeaderComponent />
       <Container>
         <ContainerLeft>
           <ComposeComponent

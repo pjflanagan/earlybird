@@ -1,1 +1,1 @@
-export * from './useTwitter';
+export * from './useDoubleClick';

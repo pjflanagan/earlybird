@@ -13,6 +13,12 @@ import {
 import {
   GiCancel
 } from 'react-icons/gi';
+import {
+  IoMdLogOut
+} from 'react-icons/io';
+import {
+  AiOutlineUser
+} from 'react-icons/ai';
 
 export const getIcon = (iconName: string): JSX.Element => {
   return {
@@ -23,6 +29,8 @@ export const getIcon = (iconName: string): JSX.Element => {
     send: <GrSend />,
     twitter: <GrTwitter />,
     pencil: <BiPencil />,
-    cancel: <GiCancel />
+    cancel: <GiCancel />,
+    logout: <IoMdLogOut />,
+    user: <AiOutlineUser />
   }[iconName] || <GrTwitter />;
 }

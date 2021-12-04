@@ -17,6 +17,25 @@
     }
   }
 
+  &.hoverRevealLabel {
+    .labelHolder {
+      width: 0;
+      max-width: 0;
+      overflow: hidden;
+      padding: 0;
+      transition: max-width 0.4s;
+    }
+
+    &:hover {
+      .labelHolder {
+        width: auto;
+        max-width: 200px;
+        padding: 8px 16px 0 4px;
+        white-space: nowrap;
+      }
+    }
+  }
+
   &.none {
     background: none;
 
@@ -37,7 +56,6 @@
     background: $purple;
 
     .iconHolder {
-      width: 32px;
 
       svg {
         color: $white;
@@ -53,7 +71,6 @@
     background: $grey;
 
     .iconHolder {
-      width: 32px;
 
       svg {
         color: $white;
@@ -65,15 +82,53 @@
     }
   }
 
+  &.white {
+    background: $white;
+    color: $purple;
+
+    &:hover {
+      .iconHolder {
+        svg {
+          color: $purple;
+
+          path {
+            stroke: $purple;
+          }
+        }
+      }
+    }
+
+    .iconHolder {
+      svg {
+        color: $grey;
+
+        path {
+          stroke: $grey;
+        }
+      }
+    }
+
+  }
+
   &.iconColor-purple {
     .iconHolder {
-      width: 32px;
-
       svg {
         color: $purple;
 
         path {
           stroke: $purple;
+        }
+      }
+    }
+  }
+
+  &.iconColor-white {
+    .iconHolder {
+      svg {
+        color: $white;
+
+        path {
+          stroke: $white;
         }
       }
     }

@@ -48,13 +48,18 @@ export const HeaderIcon: FC<HeaderIconProps> = ({
 }
 
 type HeaderLinkProps = {
-  onClick: () => void;
+  onClick?: () => void;
+  className?: string;
 }
 
 export const HeaderLink: FC<HeaderLinkProps> = ({
-  onClick
+  onClick,
+  className,
+  children
 }) => {
   return (
-    <div onClick={onClick}></div>
+    <div className={`${Style.headerLink} ${className}`} onClick={onClick}>
+      {children}
+    </div>
   );
 }

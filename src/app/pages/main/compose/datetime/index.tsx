@@ -5,7 +5,6 @@ import { ButtonFrame, ButtonIcon, ButtonLabel } from 'app/elements'; // Calendar
 
 import Style from './style.module.scss';
 
-
 const padNumber = (n: number) => `${n}`.padStart(2, '0');
 
 // yyyy-MM-ddThh:mm

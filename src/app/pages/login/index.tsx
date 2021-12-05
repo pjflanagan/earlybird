@@ -22,7 +22,7 @@ export const PageLogin: FC = () => {
       <Container className={Style.container}>
         <div className={Style.promptHolder}>
           <div className={Style.title}>
-            Tweet from whenever you want to!
+            Tweet whenever you want to, right now!
           </div>
           <div className={Style.subTitle}>
             Earlybird helps manage your drafted and scheduled tweets.

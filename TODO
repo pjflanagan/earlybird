@@ -1,9 +1,10 @@
 
 MVP
 - [ ] API calls
-  - [ ] Load
-  - [ ] create
-  - [ ] edit tweets
+  - [ ] cread
+  - [ ] read
+  - [ ] update
+  - [ ] delete
 - [x] Calendar  <input type="datetime-local"> with default browser picker
 - [ ] Images 
     - [ ] Favicon 

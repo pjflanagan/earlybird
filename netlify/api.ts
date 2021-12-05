@@ -1,6 +1,11 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 const { AUTH_0_DOMAIN } = process.env;
+
+type Error = {
+  statusCode: number;
+  message: string;
+} | null;
 
 export const errorResponse = (e) => {
   return {
@@ -15,7 +20,7 @@ export const baseFetchEndpoint = async function (endpoint) {
   let response;
 
   try {
-    response = await fetch(endpoint);
+    response = await axios.get(endpoint);
   } catch (e) {
     return errorResponse(e);
   }
@@ -29,19 +34,27 @@ export const baseFetchEndpoint = async function (endpoint) {
 export const getTwitterUserAccessToken = async (
   auth0UserId: string,
   auth0AccessToken: string,
-) => {
+): Promise<[string, string, Error]> => {
   let response;
 
   try {
-    response = await fetch(
-      `https://${AUTH_0_DOMAIN}/api/v2/users/${auth0UserId}`,
-      {
-        headers: { authorization: `Bearer ${auth0AccessToken}` }
-      });
+    response = await axios({
+      method: 'POST',
+      url: `https://${AUTH_0_DOMAIN}/api/v2/users/${auth0UserId}`,
+      headers: { authorization: `Bearer ${auth0AccessToken}` }
+    });
   } catch (e) {
-    console.log(e);
+    const errorMessage = 'Error accessing twitter api';
+    console.log('ERROR: [getTwitterUserAccessToken]', errorMessage, e);
+    return ['', '', {
+      statusCode: 500,
+      message: errorMessage,
+    }];
   }
 
   const userData = await response.json();
-  return userData.identities[0].access_token;
+  const { user_id, access_token } = userData.identities.find(
+    (i) => i.connection === 'twitter'
+  );
+  return [user_id, access_token, null];
 }

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 
 import { Container, ContainerLeft, ContainerRight, Splash } from 'app/elements';
-import { Tweet } from 'app/utils'; // API
+import { Tweet, API } from 'app/utils';
 
 import { LibraryComponent } from './library';
 import { ComposeComponent } from './compose';
@@ -66,25 +66,37 @@ const DEFAULT_COMPOSE: ComposeType = {
   originalTweet: undefined,
 }
 
-// const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
-// const api = new API(AUTH_0_DOMAIN);
+const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
+const api = new API(AUTH_0_DOMAIN);
 
 export const PageMain: FC = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0(); // getAccessTokenSilently
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
+  const [init, setInit] = useState(false);
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
 
   useEffect(() => {
-    console.log({ user, isAuthenticated });
-    if (isAuthenticated) {
-      // api.getAccessToken(getAccessTokenSilently);
-      setTweets(TWEETS);
+
+    const initApiAndReadTweets = async () => {
+      if (user) {
+        console.log({ user });
+        await api.getAccessToken(user.sub || '', getAccessTokenSilently);
+        // await api.readTweets();
+      }
     }
-    // else {
-    //   console.error('Unable to authenticate');
-    //   window.location.replace('/login');
-    // }
+
+    if (!init) {
+      if (isAuthenticated) {
+        setInit(true);
+        initApiAndReadTweets(); // const loadedTweets = ...
+        setTweets(TWEETS);
+      }
+      // else {
+      //   console.error('Unable to authenticate');
+      //   window.location.replace('/login');
+      // }
+    }
   }, [user]);
 
   // Edit

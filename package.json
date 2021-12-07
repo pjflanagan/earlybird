@@ -34,7 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "netlify": "netlify dev",
-    "kill": "npx kill-port 3000"
+    "kill": "npx kill-port 3000",
+    "pwa-asset-gen": "pwa-asset-generator ./public/logo-square.png ./public/img/pwa --background: \"rgb(86, 47, 216)\" --manifest ./public/manifest.json --index ./public/index.html --path \"%PUBLIC_URL%\" --type png"
   },
   "eslintConfig": {
     "extends": [

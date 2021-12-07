@@ -37,22 +37,26 @@ export const getTwitterUserAccessToken = async (
 ): Promise<[string, string, Error]> => {
   let response;
 
+  console.log({ auth0UserId, auth0AccessToken });
+
   try {
     response = await axios({
-      method: 'POST',
+      method: 'GET',
       url: `https://${AUTH_0_DOMAIN}/api/v2/users/${auth0UserId}`,
       headers: { authorization: `Bearer ${auth0AccessToken}` }
     });
   } catch (e) {
-    const errorMessage = 'Error accessing twitter api';
-    console.log('ERROR: [getTwitterUserAccessToken]', errorMessage, e);
-    return ['', '', {
-      statusCode: 500,
-      message: errorMessage,
-    }];
+    // const errorMessage = 'Error accessing twitter api';
+    // console.log('ERROR: [getTwitterUserAccessToken]', errorMessage, e);
+    return ['', '', e as Error];
   }
 
-  const userData = await response.json();
+  const userData = response.data;
+
+  console.log({
+    userData
+  });
+
   const { user_id, access_token } = userData.identities.find(
     (i) => i.connection === 'twitter'
   );

@@ -41,6 +41,7 @@ export class API {
   ): Promise<void> {
     this.auth0UserId = auth0UserSub;
     this.auth0AccessToken = await getAccessTokenSilently({});
+    console.log(this.auth0AccessToken);
   }
 
   async readTweets(): Promise<void> {

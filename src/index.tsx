@@ -30,7 +30,7 @@ ReactDOM.render(
     clientId={process.env.REACT_APP_AUTH_0_CLIENT_ID!}
     redirectUri={window.location.origin}
     audience={`https://${process.env.REACT_APP_AUTH_0_DOMAIN}/api/v2/`}
-    scope="read:current_user"
+    scope="read:current_user" // read:user_idp_tokens
   >
     <App />
   </Auth0Provider>,

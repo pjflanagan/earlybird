@@ -32,6 +32,7 @@ const handler: Handler = async (event, context) => {
   }
 
   const [twitterUserId, twitterAccessToken, error] = await getTwitterUserAccessToken(auth0UserId, auth0AccessToken);
+  console.log({ twitterUserId, twitterAccessToken });
   if (error) {
     return errorResponse(error);
   }

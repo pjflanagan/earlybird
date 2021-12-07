@@ -69,6 +69,14 @@ const DEFAULT_COMPOSE: ComposeType = {
 const AUTH_0_DOMAIN = process.env.REACT_APP_AUTH_0_DOMAIN || '';
 const api = new API(AUTH_0_DOMAIN);
 
+const getLibraryWithTweetRemoved = (tweets: Tweet[], tweet: Tweet) => {
+  return tweets.filter(t => t.id !== tweet.id);
+}
+
+const getLibraryWithTweetAdded = (tweets: Tweet[], tweet: Tweet) => {
+  return [...tweets, tweet];
+}
+
 export const PageMain: FC = () => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
@@ -80,7 +88,8 @@ export const PageMain: FC = () => {
 
     const initApiAndReadTweets = async () => {
       if (user) {
-        console.log({ user });
+        // const claims = await getIdTokenClaims();
+        // console.log({ user, claims });
         await api.getAccessToken(user.sub || '', getAccessTokenSilently);
         // await api.readTweets();
       }
@@ -101,19 +110,20 @@ export const PageMain: FC = () => {
 
   // Edit
 
+  // set a tweet original and working tweet in the compose
   const setComposeTweet = (tweet: Tweet) => {
-    setTweets(tweets.filter(t => t.id !== tweet.id));
-    setCompose({
+    setCompose(() => ({
       workingTweet: { ...tweet },
       originalTweet: { ...tweet },
-    });
+    }));
   }
 
+  // modify the working tweet in the compose
   const setWorkingTweet = (newTweet: Tweet) => {
-    setCompose({
+    setCompose(() => ({
       workingTweet: { ...newTweet },
       originalTweet: compose.originalTweet
-    })
+    }));
   }
 
   const clearCompose = () => {
@@ -121,20 +131,32 @@ export const PageMain: FC = () => {
   }
 
   const cancelCompose = () => {
+    // replace the compose into the library if it exists
     if (compose.originalTweet) {
       addTweetToLibrary(compose.originalTweet);
     }
+    // clear the compose
     clearCompose();
   }
 
   // Library
 
   const removeTweetFromLibrary = (tweet: Tweet) => {
-    setTweets(tweets.filter(t => t.id !== tweet.id));
+    setTweets(getLibraryWithTweetRemoved(tweets, tweet));
   }
 
   const addTweetToLibrary = (tweet: Tweet) => {
-    setTweets([...tweets, tweet]);
+    setTweets(() => [...tweets, tweet]);
+  }
+
+  const editTweet = (tweet: Tweet) => {
+    let newTweets = tweets;
+    if (compose.originalTweet) {
+      newTweets = getLibraryWithTweetAdded(newTweets, compose.originalTweet);
+    }
+    newTweets = getLibraryWithTweetRemoved(newTweets, tweet);
+    setTweets(newTweets);
+    setComposeTweet(tweet);
   }
 
   // Backend
@@ -192,7 +214,7 @@ export const PageMain: FC = () => {
         <ContainerRight>
           <LibraryComponent
             tweets={tweets}
-            editTweet={setComposeTweet}
+            editTweet={editTweet}
             sendTweet={(tweet: Tweet) => {
               sendTweet(tweet, removeTweetFromLibrary);
             }}

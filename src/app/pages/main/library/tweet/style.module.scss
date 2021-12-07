@@ -12,6 +12,23 @@
     background: #fff;
     border: 1px solid #0002;
     border-radius: 6px;
+    max-height: 400px; // TODO: max body contain max height
+    transition: transform 0.4s, max-height 0.4s, opacity 0.4s;
+
+    &.editAnimation {
+      transform: translate(-100%);
+      opacity: 0;
+    }
+
+    &.removeAnimation {
+      max-height: 0px;
+      opacity: 0;
+    }
+
+    &.sendAnimation {
+      transform: translate(100%);
+      opacity: 0;
+    }
 
     .dateHolderSmall {
       width: 100%;
@@ -19,22 +36,21 @@
     }
 
     .bodyHolder {
-      // TODO: this height needs to just contain the elements
       margin: 0 6px;
       width: calc(100% - 12px);
-      height: 80px;
+      height: fit-content;
 
       .body {
         border-bottom: 1px solid #0002;
-        height: calc(100% - 12px);
-        padding: 8px 0 4px;
+        min-height: 80px;
+        padding: 8px;
       }
     }
 
     .actionRow {
       height: 48px;
-      margin: 0 20px;
-      width: calc(100% - 40px);
+      margin: 0 6px;
+      width: calc(100% - 12px);
       display: flex;
 
       .labelHolder {

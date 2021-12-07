@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 
 import { Pill, Display } from 'app/elements';
 import { Tweet } from 'app/utils';
-import { useDoubleClick } from 'app/hooks';
+import { useDoubleClick, useInvokedAnimation } from 'app/hooks';
 
 import Style from './style.module.scss';
+import classNames from 'classnames';
 
 type TweetComponentProps = {
   edit: (tweet: Tweet) => void;
@@ -30,14 +31,20 @@ export const TweetComponent: FC<TweetComponentProps> = ({
   remove,
 }) => {
 
+  const [isEditAnimation, invokeEdit] = useInvokedAnimation(() => edit(tweet), 400);
+  const [isRemoveAnimation, invokeRemove] = useInvokedAnimation(() => remove(tweet), 400);
+  const [isSendAnimation, invokeSend] = useInvokedAnimation(() => send(tweet), 400);
+  const [clickCount, doubleClick] = useDoubleClick(invokeRemove);
 
-  const [clickCount, doubleClick] = useDoubleClick(
-    () => remove(tweet)
-  );
+  const className = classNames(Style.tweet, {
+    [Style.editAnimation]: isEditAnimation,
+    [Style.removeAnimation]: isRemoveAnimation,
+    [Style.sendAnimation]: isSendAnimation,
+  });
 
   return (
     <div className={Style.tweetHolder}>
-      <div className={Style.tweet}>
+      <div className={className}>
         <Display size="sm" className={Style.dateHolderSmall}>
           {
             tweet.date
@@ -72,14 +79,14 @@ export const TweetComponent: FC<TweetComponentProps> = ({
               background="none"
               className={Style.nub}
               icon="pencil"
-              onClick={() => edit(tweet)}
+              onClick={invokeEdit}
             />
             <Pill
               background="none"
               iconColor="purple"
               className={Style.nub}
               icon="send"
-              onClick={() => send(tweet)}
+              onClick={invokeSend}
             />
           </div>
         </div>

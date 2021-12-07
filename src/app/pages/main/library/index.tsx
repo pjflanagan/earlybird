@@ -12,6 +12,7 @@ type LibraryComponentProps = {
   sendTweet: (tweet: Tweet) => void;
   deleteTweet: (tweet: Tweet) => void;
   tweets: Tweet[];
+  hasLoadedTweets: boolean;
 }
 
 export const LibraryComponent: FC<LibraryComponentProps> = ({
@@ -19,21 +20,17 @@ export const LibraryComponent: FC<LibraryComponentProps> = ({
   sendTweet,
   deleteTweet,
   tweets,
+  hasLoadedTweets,
 }) => {
 
   const [filterBy, setFilterBy] = useState<FilterOption>(FilterOption.ALL);
 
   const renderEmptyLibrary = (): JSX.Element => {
-    // TODO: if empty and loaded, show empty, if loading show this
-    // TODO: move this to scss
     return (
-      <div style={{
-        textAlign: 'center',
-        width: '100%',
-        color: '#0004',
-        padding: '20px'
-      }}>
-        Loading tweets...
+      <div className={Style.placeholder}>
+        {
+          hasLoadedTweets ? 'No tweets' : 'Loading tweets...'
+        }
       </div>
     )
   };

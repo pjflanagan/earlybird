@@ -80,33 +80,32 @@ const getLibraryWithTweetAdded = (tweets: Tweet[], tweet: Tweet) => {
 export const PageMain: FC = () => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
-  const [init, setInit] = useState(false);
+  const [hasLoadedTweets, setHasLoadedTweets] = useState(false);
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [compose, setCompose] = useState<ComposeType>(DEFAULT_COMPOSE);
 
   useEffect(() => {
-
     const initApiAndReadTweets = async () => {
       if (user) {
         // const claims = await getIdTokenClaims();
         // console.log({ user, claims });
         await api.getAccessToken(user.sub || '', getAccessTokenSilently);
-        // await api.readTweets();
+        // const loadedTweets = await api.readTweets();s
+        setTweets(TWEETS); // loadedTweets
+        setHasLoadedTweets(true);
       }
     }
 
-    if (!init) {
+    // if isLoading becomes false
+    if (!isLoading) {
       if (isAuthenticated) {
-        setInit(true);
-        initApiAndReadTweets(); // const loadedTweets = ...
-        setTweets(TWEETS);
+        initApiAndReadTweets();
+      } else {
+        console.error('Unable to authenticate');
+        window.location.replace('/login');
       }
-      // else {
-      //   console.error('Unable to authenticate');
-      //   window.location.replace('/login');
-      // }
     }
-  }, [user]);
+  }, [isLoading]);
 
   // Edit
 
@@ -213,6 +212,7 @@ export const PageMain: FC = () => {
         </ContainerLeft>
         <ContainerRight>
           <LibraryComponent
+            hasLoadedTweets={hasLoadedTweets}
             tweets={tweets}
             editTweet={editTweet}
             sendTweet={(tweet: Tweet) => {

@@ -1,5 +1,4 @@
 
-import { GetTokenSilentlyOptions } from '@auth0/auth0-react';
 
 // GET https://ads-api.twitter.com/10/accounts/18ce54d4x5t/draft_tweets?count=1
 // GET https://ads-api.twitter.com/10/accounts/18ce54d4x5t/scheduled_tweets?count=1
@@ -26,6 +25,7 @@ const makeEndpointWithParams =
 
 export class API {
 
+  ready = false;
   auth0Domain: string;
   auth0UserId = '';
   auth0AccessToken = '';
@@ -35,19 +35,24 @@ export class API {
     this.auth0Domain = domain;
   }
 
-  async getAccessToken(
-    auth0UserSub: string,
-    getAccessTokenSilently: (options?: GetTokenSilentlyOptions) => Promise<string>
-  ): Promise<void> {
+  setAuth0UserSub(auth0UserSub: string): void {
     this.auth0UserId = auth0UserSub;
-    this.auth0AccessToken = await getAccessTokenSilently({});
-    console.log(this.auth0AccessToken);
   }
 
-  async readTweets(): Promise<void> {
+  setAuth0AccessToken(auth0AccessToken: string): void {
+    this.auth0AccessToken = auth0AccessToken;
+    this.ready = true;
+  }
+
+  makeDefaultParams(): URLSearchParams {
     const params = new URLSearchParams();
     params.append('auth0UserId', this.auth0UserId);
     params.append('auth0AccessToken', this.auth0AccessToken);
+    return params;
+  }
+
+  async readTweets(): Promise<void> {
+    const params = this.makeDefaultParams();
     const data = await fetch(makeEndpointWithParams('read', params));
     console.log(data);
   }

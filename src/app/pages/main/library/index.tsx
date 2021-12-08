@@ -26,6 +26,8 @@ export const LibraryComponent: FC<LibraryComponentProps> = ({
   const [filterBy, setFilterBy] = useState<FilterOption>(FilterOption.ALL);
 
   const renderEmptyLibrary = (): JSX.Element => {
+    // TODO: a nicer placeholder would have this text where the filter is 
+    // and a couple "ghost" tweets
     return (
       <div className={Style.placeholder}>
         {

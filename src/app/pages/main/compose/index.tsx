@@ -60,6 +60,7 @@ export const ComposeComponent: FC<ComposeComponentProps> = ({
           value={tweet?.body || ''}
           placeholder={COMPOSE_PLACEHOLDER_TEXT}
           onChange={setBody}
+          rows={10}
         />
         <Display size={['sm', 'md']} className={Style.calendarHolder}>
           <DateTimeToggleComponent

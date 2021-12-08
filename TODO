@@ -1,3 +1,15 @@
+Tutorials And Mgmt
+- auth0
+  - https://manage.auth0.com/dashboard/us/flannyapp
+  - https://auth0.com/docs/connections/calling-an-external-idp-api
+  - https://auth0.com/docs/connections/adding-scopes-for-an-external-idp
+  - https://github.com/auth0-samples/auth0-react-samples/blob/master/Sample-01/src/views/ExternalApi.js
+  - https://community.auth0.com/t/equivalent-of-read-user-idp-tokens-for-a-spa/6222
+  - https://www.youtube.com/watch?v=a3YIzB70WQQ
+
+TODO: continue from here - validate the twitter apis
+- twitter
+  - https://developer.twitter.com/en/docs/twitter-ads-api/creatives/api-reference/draft-tweets
 
 MVP
 - [ ] API calls
@@ -18,3 +30,4 @@ MVP 2
     - [ ] no show year arrows
     - [ ] Don’t go back further than today
     - [ ] Disable all past
+- [ ] better character counting: https://github.com/twitter/twitter-text

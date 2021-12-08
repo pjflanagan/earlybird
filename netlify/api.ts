@@ -54,7 +54,8 @@ export const getTwitterUserAccessToken = async (
   const userData = response.data;
 
   console.log({
-    userData
+    userData,
+    identity: userData.identities[0]
   });
 
   const { user_id, access_token } = userData.identities.find(

@@ -4,7 +4,7 @@ import classNames from "classnames";
 import * as Style from './style.module.scss';
 
 type SplashProps = {
-  isOpen: boolean;
+  isOpen?: boolean;
 }
 
 export const Splash: FC<SplashProps> = ({
@@ -12,7 +12,7 @@ export const Splash: FC<SplashProps> = ({
 }) => {
 
   const className = classNames(Style.splash, {
-    [Style.closed]: !isOpen
+    [Style.closed]: isOpen === false
   })
 
   return (

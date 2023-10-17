@@ -1,6 +1,6 @@
 # Earlybird
 
-Earlybird is moving to a new url -> https://earlybird.flanny.com
+Earlybird is moving to a new url -> https://earlybird.flanny.app
 And a new tech stack
 - Twitter API
 - Auth 0
